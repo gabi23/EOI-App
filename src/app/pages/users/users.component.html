@@ -1,1 +1,6 @@
-<p>users works!</p>
+<div class="users" *ngFor="let user of users">
+    <p>Name: {{user.name}}</p>
+    <p>email: {{user.email}}</p>
+    <p>Type: {{user.type}}</p>
+    <p>Courses: {{user.courses}}</p>
+</div>
