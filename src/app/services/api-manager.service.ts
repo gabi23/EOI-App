@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import axios from 'axios';
-import { ResourceLoader } from '@angular/compiler';
 
 export type User = {
   id?: number, 
   name : string,
   email : string,
-  type : string
+  type : string,
+  safeWord?: string,  
+  courses?: string []
 };
 
 @Injectable({
@@ -21,4 +22,14 @@ url = "http://localhost:3000/users"
       .then( res => res.data)
     
   }
+
+
+  getAllUsers(): Promise<User[]> {
+    const users = axios.get(this.url)
+                    .then(response => response.data)
+                    .catch(error => console.log(error));
+    return users;
+  }
+
+
 }
