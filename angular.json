@@ -123,6 +123,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "EOI-App"
+    }
+  },
+  "defaultProject": "EOI-App",
+  "cli": {
+    "analytics": "9cad83ac-147f-493a-8f91-59d5c4a769fb"
+  }
 }

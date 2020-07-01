@@ -1,0 +1,71 @@
+.nav-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    
+}
+
+.top{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    width: 100%;
+    height: 5%;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.12); 
+}
+
+.top > span{
+    font-weight: bold;
+    margin-left: auto;
+ 
+}
+
+.top > button{
+    margin: 5px;
+    margin-left: auto;
+}
+
+#headline{
+    border:none;
+    background: url(../../../assets/view_headline-black-24dp.svg) no-repeat;
+    background-position: center;
+    width: 18px;
+    height: 18px;
+   
+}
+
+// Componetes de los router links
+.enlaces-title{
+    padding: 20px 24px 0px 24px;
+    margin-bottom: 8px;
+    color: rgba(20, 19, 19, 0.8);
+    font-size: 12px;
+    font-weight: 600;
+    margin-bottom: 12px;
+    text-transform: uppercase;
+}
+
+.component-buttons{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+    
+}
+
+.changePage {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    height: 50px;
+}
+
+.changePage > img{
+    margin-left: 25px;
+    margin-right: 10px;
+    
+}
