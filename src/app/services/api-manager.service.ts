@@ -7,7 +7,8 @@ export type User = {
   email: string,
   type: string,
   safeWord?: string,  
-  courses?: number[]
+  courses?: number[],
+  gitHubLogin?: string
 };
 
 export type Course = {

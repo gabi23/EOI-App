@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiManagerService, User, Course } from '../../services/api-manager.service';
+import { GitHubApiService } from '../../services/git-hub-api.service'
 import { ActivatedRoute, Params } from '@angular/router';
+
 
 
 
@@ -11,10 +13,11 @@ import { ActivatedRoute, Params } from '@angular/router';
   styleUrls: ['./user.component.scss']
 })
 export class UserComponent implements OnInit {
-  user : User; 
+  user = {}; 
   courses : Course []; 
+  repos : any[];
 
-  constructor( private apiManager : ApiManagerService, private route: ActivatedRoute ) { 
+  constructor( private apiManager : ApiManagerService, private route: ActivatedRoute, private gitHubApiManager : GitHubApiService ) { 
     this.loadUser();
   
 
@@ -30,6 +33,7 @@ export class UserComponent implements OnInit {
       .then((user) => {
         this.user = user;
         this.loadUserCourses(user.courses)
+        this.loadUserRepositories(user.gitHubLogin)
        }).catch((err) => {
          console.log (err);
       });
@@ -42,6 +46,17 @@ export class UserComponent implements OnInit {
       }).catch((err) => {
         console.log (err);
      });
+  }
+
+  loadUserRepositories (gitHubLogin : string){
+    this.gitHubApiManager.getUserRepos(gitHubLogin)
+      .then((repos) => {
+        this.repos = repos;
+        
+      }).catch((err) => {
+        console.log (err);
+        
+      });
   }
 
 
