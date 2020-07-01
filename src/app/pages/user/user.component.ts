@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiManagerService, User } from '../../services/api-manager.service';
+import { ApiManagerService, User, Course } from '../../services/api-manager.service';
 import { ActivatedRoute, Params } from '@angular/router';
 
 
@@ -11,10 +11,13 @@ import { ActivatedRoute, Params } from '@angular/router';
   styleUrls: ['./user.component.scss']
 })
 export class UserComponent implements OnInit {
-  user = {};
+  user : User; 
+  courses : Course []; 
 
   constructor( private apiManager : ApiManagerService, private route: ActivatedRoute ) { 
     this.loadUser();
+  
+
 
   }
 
@@ -26,9 +29,19 @@ export class UserComponent implements OnInit {
     this.apiManager.getUser(Number(this.route.snapshot.paramMap.get("id")))
       .then((user) => {
         this.user = user;
+        this.loadUserCourses(user.courses)
        }).catch((err) => {
          console.log (err);
       });
+  }
+
+  loadUserCourses (ids : number []){
+    this.apiManager.getUserCourses(ids)
+      .then((courses) => {
+        this.courses = courses;
+      }).catch((err) => {
+        console.log (err);
+     });
   }
 
 

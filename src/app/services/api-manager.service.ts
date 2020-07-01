@@ -7,7 +7,7 @@ export type User = {
   email: string,
   type: string,
   safeWord?: string,  
-  courses?: string[]
+  courses?: number[]
 };
 
 export type Course = {
@@ -42,6 +42,11 @@ export class ApiManagerService {
                     .then(response => response.data)
                     .catch(error => console.log(error));
     return courses;
+  }
+
+  public getUserCourses( ids : number []): Promise<Course[]>{
+    const promises = ids.map( id => axios.get(`${this.urlCourses}/${id}`).then(r => r.data));
+    return Promise.all(promises);
   }
 
 
