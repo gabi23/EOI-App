@@ -46,7 +46,8 @@ export class ApiManagerService {
   }
   
   public getUserCourses( ids : number []): Promise<Course[]>{
-    const promises = ids.map( id => axios.get(`${this.urlCourses}/${id}`).then(r => r.data));
+    const promises = ids.map( id => axios.get(`${this.urlCourses}/${id}`)
+    .then(r => r.data));
     return Promise.all(promises);
   }
 
