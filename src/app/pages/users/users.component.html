@@ -11,20 +11,20 @@
 <div *ngIf="userFound.length == 0 && course=='All courses'">
     <div class="users" *ngFor="let user of users" routerLink="{{user.id}}">
         <p>Name: {{user.name}}</p>
-        <p>Courses: {{user.courses}}</p>
+        <p>Courses: {{user.nameOfCourses}}</p>
     </div>
 </div>
 
 <div *ngIf="userFound.length == 0 && usersInCourse.length > 0">
     <div class="users" *ngFor="let user of usersInCourse" routerLink="{{user.id}}">
         <p>Name: {{user.name}}</p>
-        <p>Courses: {{user.courses}}</p>
+        <p>Courses: {{user.nameOfCourses}}</p>
     </div>
 </div>
 
 <div *ngIf="userFound.length > 0">
     <div class="users" *ngFor="let user of userFound" routerLink="{{user.id}}">
         <p>Name: {{user.name}}</p>
-        <p>Courses: {{user.courses}}</p>
+        <p>Courses: {{user.nameOfCourses}}</p>
     </div>
 </div>
