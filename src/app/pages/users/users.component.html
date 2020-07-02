@@ -1,6 +1,30 @@
-<div class="users" *ngFor="let user of users">
-    <p>Name: {{user.name}}</p>
-    <p>email: {{user.email}}</p>
-    <p>Type: {{user.type}}</p>
-    <p>Courses: {{user.courses}}</p>
+<div class="">
+    <input  type="text" name="userToSearch" placeholder="Name" [(ngModel)]="userToSearch"/>
+    <button type="button" (click)="searchUser()" title="Search contact">Search</button>
+    <select class="" *ngIf="userFound.length == 0" name="select-course" (change)="courseSelected()" [(ngModel)]="course">
+        <option value="All courses">All courses</option>
+        <option *ngFor="let course of courses" value="{{course.name}}">{{course.name}}</option>
+    </select>
+    <button *ngIf="userFound.length > 0" (click)="back()">Back</button>
+</div>
+
+<div *ngIf="userFound.length == 0 && course=='All courses'">
+    <div class="users" *ngFor="let user of users" routerLink="{{user.id}}">
+        <p>Name: {{user.name}}</p>
+        <p>Courses: {{user.nameOfCourses}}</p>
+    </div>
+</div>
+
+<div *ngIf="userFound.length == 0 && usersInCourse.length > 0">
+    <div class="users" *ngFor="let user of usersInCourse" routerLink="{{user.id}}">
+        <p>Name: {{user.name}}</p>
+        <p>Courses: {{user.nameOfCourses}}</p>
+    </div>
+</div>
+
+<div *ngIf="userFound.length > 0">
+    <div class="users" *ngFor="let user of userFound" routerLink="{{user.id}}">
+        <p>Name: {{user.name}}</p>
+        <p>Courses: {{user.nameOfCourses}}</p>
+    </div>
 </div>

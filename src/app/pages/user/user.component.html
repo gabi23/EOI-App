@@ -1,2 +1,6 @@
-<p>user works!</p>
-{{ user | json }}
+<h1>{{user.name}}</h1>
+<p>{{user.email}}</p>
+<h2>Cursos:</h2>
+<ul *ngFor="let course of courses" >
+  <li>{{course.name}}</li>
+</ul>
