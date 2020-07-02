@@ -32,7 +32,7 @@ export class UsersComponent implements OnInit {
     this.courses = courses;
 
     this.users.forEach(user => {
-      const userCoursesNames = this.apiManagerServices.getUserCourses(user.courses)
+      this.apiManagerServices.getUserCourses(user.courses)
       .then((courses) => {
          user.nameOfCourses = courses.map( course => course.name);
       }).catch((err) => {
