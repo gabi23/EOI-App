@@ -12,10 +12,9 @@ import {User} from '../../services/api-manager.service';
 export class RegisterComponent implements OnInit {
   
 
-  
   users: [] = [];
   
-  newUser: User = {name : "", email : ""}
+  newUser: User = {name : "", email : "" , type: ""}
 
   constructor(private ApiManagerService: ApiManagerService) { 
     
