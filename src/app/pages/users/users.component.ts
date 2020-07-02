@@ -30,6 +30,13 @@ export class UsersComponent implements OnInit {
   async loadCourses(): Promise<void> {
     const courses = await this.apiManagerServices.getCourses();
     this.courses = courses;
+
+    this.users.forEach(user => {
+      user.nameOfCourses = [];
+      this.courses.forEach(course => {
+        if(user.courses.includes(course.id)) user.nameOfCourses.push(course.name);
+      });
+    });
   }
 
   searchUser(){
@@ -50,7 +57,7 @@ export class UsersComponent implements OnInit {
 
   courseSelected(){
     this.usersInCourse = [];
-    this.usersInCourse = this.users.filter(user => user.courses.includes(this.course));
+    this.usersInCourse = this.users.filter(user => user.nameOfCourses.includes(this.course));
   }
 
 }
