@@ -7,7 +7,8 @@ export type User = {
   email: string,
   type: string,
   safeWord?: string,  
-  courses?: string[]
+  courses?: number[],
+  nameOfCourses?: string[]
 };
 
 export type Course = {
