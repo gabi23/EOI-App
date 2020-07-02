@@ -40,8 +40,8 @@ export class ApiManagerService {
 
   public getCourses(): Promise<Course[]>{
     const courses = axios.get(this.urlCourses)
-                    .then(response => response.data)
-                    .catch(error => console.log(error));
+                      .then(response => response.data)
+                      .catch(error => console.log(error));
     return courses;
   }
 
