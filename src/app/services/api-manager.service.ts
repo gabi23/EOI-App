@@ -10,7 +10,6 @@ export type User = {
   role: string,
   safeWord?: string,  // A falta de generar la "pass" al registrar
   courses?: number[],
-  nameOfCourses?: string[],  // Quitar mas adelante
   gitHubLogin? : string
 };
 
@@ -50,6 +49,27 @@ export class ApiManagerService {
                       .then(response => response.data)
                       .catch(error => console.log(error));
     return courses;
+  }
+
+  public getCourseByName(name:string): Promise<Course[]>{
+    const course = axios.get(`${this.urlCourses}?name=${name}`)
+      .then(response => response.data)
+      .catch(error => console.log(error));
+    return course;
+  }
+
+  public getUserByName(name:string): Promise<User[]>{
+    const user = axios.get(`${this.urlUsers}?name_like=${name}`)
+      .then(response => response.data)
+      .catch(error => console.log(error));
+    return user;
+  }
+
+  public getUsersByCourses(id:number): Promise<User[]>{
+    const users = axios.get(`${this.urlUsers}?courses_like=${id}`)
+      .then(response => response.data)
+      .catch(error => console.log(error));
+    return users;
   }
   
   public getUserCourses( ids : number []): Promise<Course[]>{

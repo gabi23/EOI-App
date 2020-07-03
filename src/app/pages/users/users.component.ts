@@ -10,10 +10,9 @@ export class UsersComponent implements OnInit {
 
   users: User[] = [];
   courses: Course[] = [];
+  nameOfCourses: string[][] = [];
+  courseSelected: string = "All courses";
   userToSearch: string = "";
-  userFound: User[] = [];
-  course: string = "All courses";
-  usersInCourse: User[] = [];
 
   constructor(private apiManagerServices: ApiManagerService) {
     this.loadUsers();
@@ -23,44 +22,41 @@ export class UsersComponent implements OnInit {
   ngOnInit(): void { }
 
   async loadUsers(): Promise<void> {
-    const users = await this.apiManagerServices.getAllUsers();
-    this.users = users;
+    this.users = await this.apiManagerServices.getAllUsers();
   }
 
   async loadCourses(): Promise<void> {
-    const courses = await this.apiManagerServices.getCourses();
-    this.courses = courses;
-
+    this.courses = await this.apiManagerServices.getCourses();
     this.users.forEach(user => {
       this.apiManagerServices.getUserCourses(user.courses)
-      .then((courses) => {
-         user.nameOfCourses = courses.map( course => course.name);
-      }).catch((err) => {
-        console.log (err);
-      });
-
+        .then(courses => {
+          this.nameOfCourses.push(courses.map(course => course.name));
+        })
+        .catch(err => {
+          console.log(err);
+        });
     });
   }
 
-  searchUser(){
-    this.userFound = [];
-    if(this.userToSearch != ""){
-      this.users.forEach(user => {
-        if(user.name.toLowerCase().includes(this.userToSearch.toLowerCase())){
-            this.userFound.push(user);
-        }
-      });
+  async searchUser(){
+    this.users = [];
+    this.nameOfCourses = [];
+    this.users = await this.apiManagerServices.getUserByName(this.userToSearch);
+    this.loadCourses();
+  }
+
+  async courseFilter(){
+    if(this.courseSelected != "All courses"){
+      this.users = [];
+      this.nameOfCourses = [];
+      const course = await this.apiManagerServices.getCourseByName(this.courseSelected);
+      this.users = await this.apiManagerServices.getUsersByCourses(course[0].id);
+      this.loadCourses();
+    }
+    else{
+      this.loadUsers();
+      this.loadCourses();
     }    
-  }
-
-  back(){
-    this.userFound = [];
-    this.userToSearch = "";
-  }
-
-  courseSelected(){
-    this.usersInCourse = [];
-    this.usersInCourse = this.users.filter(user => user.nameOfCourses.includes(this.course));
   }
 
 }
