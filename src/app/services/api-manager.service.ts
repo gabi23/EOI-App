@@ -52,7 +52,7 @@ export class ApiManagerService {
   }
 
   public insertUser(newUser:User): Promise<User[]>{
-    return axios.post('http://localhost:3000/users', newUser)
+    return axios.post(this.urlUsers, newUser)
     .then(response => response.data)
     .catch(error => console.log(error))
   }
