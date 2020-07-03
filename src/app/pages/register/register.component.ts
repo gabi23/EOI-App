@@ -14,7 +14,7 @@ export class RegisterComponent implements OnInit {
 
   users: [] = [];
   
-  newUser: User = {name : "", email : "" , type: ""}
+  newUser: User = {name : "", surname : "",  email : "" , role: ""}
 
   constructor(private ApiManagerService: ApiManagerService) { 
     

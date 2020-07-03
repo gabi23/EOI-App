@@ -4,17 +4,24 @@ import axios from 'axios';
 export type User = {
   id?: number, 
   name: string,
+  surname: string,
   email: string,
-  type: string,
-  safeWord?: string,  
+  phone?: number,
+  role: string,
+  safeWord?: string,  // A falta de generar la "pass" al registrar
   courses?: number[],
-  nameOfCourses?: string[]
+  nameOfCourses?: string[],  // Quitar mas adelante
+  gitHubLogin? : string
 };
 
 export type Course = {
   id: number, 
-  name: string
+  name: string,
+  studyField: string, // Posiblemente comprobar cambios más adelante
+  description: string
 };
+
+
 
 @Injectable({
   providedIn: 'root'
