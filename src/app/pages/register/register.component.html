@@ -1,7 +1,31 @@
-<input type="text"  placeholder="Name"  [(ngModel)]="newUser.name"><br>
-<br>
-<input type="text"  placeholder="Email"  [(ngModel)]="newUser.email"><br>
-<br>
-<input type="text"  placeholder="Courses"  [(ngModel)]="newUser.courses"><br>
-<br>
-<button (click)="addNewUser()">Add User</button>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="text" 
+    placeholder="Name" 
+    [(ngModel)]="newUser.name"
+    (keyup)="validationName()">
+    <br><br>
+
+    <span *ngIf="errorNameBoolean">{{errorName}}</span>
+    <br><br>
+
+    <input type="email"
+    placeholder="Email" 
+    [(ngModel)]="newUser.email"
+    (keyup)="validationEmail()">
+    <br><br>
+
+    <span *ngIf="errorEmailBoolean">{{errorEmail}}</span>
+    <br><br>
+    <button (click)="addNewUser()">Add User</button>
+</body>
+
+</html>
