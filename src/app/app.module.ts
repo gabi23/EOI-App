@@ -8,6 +8,10 @@ import { UsersComponent } from './pages/users/users.component';
 import { HomeComponent } from './pages/home/home.component';
 import { UserComponent } from './pages/user/user.component';
 import { RegisterComponent } from './pages/register/register.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatDialogModule} from '@angular/material/dialog';
+import { DialogComponent } from './components/dialog/dialog.component';
+import {MatFormFieldModule} from '@angular/material/form-field'
 
 @NgModule({
   declarations: [
@@ -16,12 +20,19 @@ import { RegisterComponent } from './pages/register/register.component';
     UsersComponent,
     HomeComponent,
     UserComponent,
-    RegisterComponent
+    RegisterComponent,
+    DialogComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    MatDialogModule,
+    MatFormFieldModule,
+    BrowserAnimationsModule
+  ],
+  entryComponents: [
+    DialogComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

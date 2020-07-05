@@ -1,0 +1,11 @@
+<div mat-dialog-content>
+  <p>Introduzca la palabra de seguridad</p>
+  <mat-form-field>
+    <mat-label>Favorite Animal</mat-label>
+    <input matInput [(ngModel)]="data.safeWord">
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">No Thanks</button>
+  <button mat-button [mat-dialog-close]="data.safeWord" cdkFocusInitial>Ok</button>
+</div>

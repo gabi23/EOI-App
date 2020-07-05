@@ -8,7 +8,7 @@
     </div>
 </div>
 
-<!--<p>Courses:</p>
+<!--  <p>Courses:</p>
     <ul>
         <li *ngFor="let nameOfCourse of nameOfCourses[i]">{{nameOfCourse}}</li>
     </ul>
@@ -33,7 +33,8 @@
 
         <div class="users-footer">
             <button routerLink="{{user.id}}" id="checkIcon"> </button>  
-           <button (click)="deleteUser(user.id)" id="deleteIcon" > </button> 
+           <button  (click)="openDialog()" id="deleteIcon" > </button> 
+           <!-- deleteUser(user.id) -->
         </div>
 
     </div>

@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { User, Course, ApiManagerService } from '../../services/api-manager.service';
+import {MatDialog} from '@angular/material/dialog';
+import {DialogComponent} from '../../components/dialog/dialog.component';
+
 
 @Component({
   selector: 'app-users',
@@ -14,12 +17,17 @@ export class UsersComponent implements OnInit {
   courseSelected: string = "All courses";
   userToSearch: string = "";
 
-  constructor(private apiManagerServices: ApiManagerService) {
+  constructor(private apiManagerServices: ApiManagerService, public dialog: MatDialog) {
     this.loadUsers();
     this.loadCourses();
   }
 
   ngOnInit(): void { }
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(DialogComponent);
+
+  }
 
   async loadUsers(): Promise<void> {
     this.users = await this.apiManagerServices.getAllUsers();
