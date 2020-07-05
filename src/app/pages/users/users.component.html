@@ -1,6 +1,6 @@
 <div class="header">
     <div class="search"> 
-        <input type="text" name="userToSearch" placeholder="Busca tu contacto ..." [(ngModel)]="userToSearch" (input)="searchUser()"/>
+        <input type="text" name="userToSearch" placeholder="Busca los alumnos..." [(ngModel)]="userToSearch" (input)="searchUser()"/>
         <select class="" name="select-course" [(ngModel)]="courseSelected" (change)="courseFilter()">
             <option value="All courses">All courses</option>
             <option *ngFor="let course of courses" value="{{course.name}}">{{course.name}}</option>
@@ -16,27 +16,26 @@
     </ul>
 </div> -->
 
-<div class="contactos">
+<div class="users">
     <div 
-    *ngFor="let item of users; index as i" 
-    class="contact-contactos">
+    *ngFor="let user of users; index as i" 
+    class="user-users">
 
-        <div  class="contact-header">
-            <div class="contact-header-picture centered">
+        <div  class="user-header">
+            <div class="user-header-picture centered">
                 <div class="circulo"></div>
             </div>
 
-            <div class="contact-header-text">
-                <span id="bold"> {{item.name}} </span>
-                <span> {{item.email}} </span>
-                <span> {{item.telefono}} </span>
+            <div class="user-header-text">
+                <span id="bold"> {{user.name}} </span>
+                <span> {{user.email}} </span>
+                <span> {{user.telefono}} </span>
             </div>
         </div>
 
-        <div class="contactos-footer">
-            <button id="editIcon"> </button> 
-            <!-- (click)="addContact()" -->
-            <button id="checkIcon"> </button>  <!-- (click)=(contacted(item)) -->
+        <div class="users-footer">
+            <!-- <button routerLink="{{user.id}}" id="editIcon" > </button>  -->
+            <button routerLink="{{user.id}}" id="checkIcon"> </button>  <!-- (click)=(contacted(user)) -->
            <button  id="deleteIcon" > </button>  <!--  (click)="deletePerson(i) -->
         </div>
 
