@@ -1,10 +1,157 @@
-p {
-    margin: 1px;
+// p {
+//     margin: 1px;
+// }
+
+// .users {
+//     margin: 15px;
+//     border: 2px solid black;
+//     width: 200px;
+//     display: inline-block;
+// }
+
+.header{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 20%;
+    display: flex;
+
+ 
 }
 
-.users {
-    margin: 15px;
-    border: 2px solid black;
-    width: 200px;
-    display: inline-block;
+.search{
+    display: flex;
+    flex: 2;
+    justify-content: center;
+    align-items: center;
+    
 }
+
+.search > input{
+    display: flex;
+    width: 300px;
+    height: 59px;
+    margin: 10px;
+    padding-left: 70px;
+    border-radius: 73px;
+    /* text-align: center; */
+
+    font-size: 18px;
+    background: url(../../../assets/search.png) no-repeat;
+    background-position: 30px 21px;
+    border: 1px solid black;
+}
+
+// Tarjetitas de contactos
+.contactos{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 20px;
+    width: 100%;
+
+}
+
+.contact-contactos {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    width: 375px;
+    height: 180px;
+    background-color: white;
+    border-radius: 16px;
+    margin: 20px;
+    border: 1px solid black;
+}
+
+// Parte superior de la tarjeta
+.contact-header{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 125px;
+}
+
+.contact-header-picture{
+    display: flex;
+    flex: 1;
+    border-radius: 16px 0px 0px 0px;
+
+}
+
+.circulo{
+    background-color:#707070;
+    border-radius: 50%;
+    border: 1px solid black;
+    height: 60px;
+    width: 60px;
+}
+
+.centered {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.contact-header-text{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    flex: 2;
+    border-radius: 0 16px 0 0;
+    
+}
+
+.contact-header-text > input {
+    height: 22px;
+    width: 184px;
+    border: 1px solid black;
+}
+
+#bold {
+    font-weight: bold;
+}
+
+// Parte inferior de la tarjeta
+.contactos-footer{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 50px;
+    border-radius: 0 0 16px 16px;
+    border-top: 1px solid black;
+}
+
+
+#editIcon{
+    background-size: 20px;
+    border:none;
+    background: url(../../../assets/editarIcon.png) no-repeat;
+    background-position: center;
+    width: 50px;
+    height: 50px;
+   
+}
+
+#checkIcon{
+    background-size: 20px;
+    border:none;
+    background: url(../../../assets/checkIcon.png) no-repeat;
+    background-position: center;
+    width: 50px;
+    height: 50px;
+   
+}
+
+#deleteIcon{
+    background-size: 20px;
+    border:none;
+    background: url(../../../assets/deleteIcon.png) no-repeat;
+    background-position: center;
+    width: 50px;
+    height: 50px;
+
+} 

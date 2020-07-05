@@ -1,15 +1,46 @@
-<div class="">
-    <input type="text" name="userToSearch" placeholder="Name" [(ngModel)]="userToSearch" (input)="searchUser()"/>
-    <select class="" name="select-course" [(ngModel)]="courseSelected" (change)="courseFilter()">
-        <option value="All courses">All courses</option>
-        <option *ngFor="let course of courses" value="{{course.name}}">{{course.name}}</option>
-    </select>
+<div class="header">
+    <div class="search"> 
+        <input type="text" name="userToSearch" placeholder="Busca tu contacto ..." [(ngModel)]="userToSearch" (input)="searchUser()"/>
+        <select class="" name="select-course" [(ngModel)]="courseSelected" (change)="courseFilter()">
+            <option value="All courses">All courses</option>
+            <option *ngFor="let course of courses" value="{{course.name}}">{{course.name}}</option>
+        </select>
+    </div>
 </div>
 
-<div class="users" *ngFor="let user of users; index as i" routerLink="{{user.id}}">
+<!-- <div class="users" *ngFor="let user of users; index as i" routerLink="{{user.id}}">
     <p>Name: {{user.name}}</p>
     <p>Courses:</p>
     <ul>
         <li *ngFor="let nameOfCourse of nameOfCourses[i]">{{nameOfCourse}}</li>
     </ul>
+</div> -->
+
+<div class="contactos">
+    <div 
+    *ngFor="let item of users; index as i" 
+    class="contact-contactos">
+
+        <div  class="contact-header">
+            <div class="contact-header-picture centered">
+                <div class="circulo"></div>
+            </div>
+
+            <div class="contact-header-text">
+                <span id="bold"> {{item.name}} </span>
+                <span> {{item.email}} </span>
+                <span> {{item.telefono}} </span>
+            </div>
+        </div>
+
+        <div class="contactos-footer">
+            <button id="editIcon"> </button> 
+            <!-- (click)="addContact()" -->
+            <button id="checkIcon"> </button>  <!-- (click)=(contacted(item)) -->
+           <button  id="deleteIcon" > </button>  <!--  (click)="deletePerson(i) -->
+        </div>
+
+</div>
+   
+    
 </div>
