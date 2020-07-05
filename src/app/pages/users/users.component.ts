@@ -59,4 +59,12 @@ export class UsersComponent implements OnInit {
     }    
   }
 
+  deleteUser(id : number) {
+    this.apiManagerServices.deleteUser(id)
+    .then(res => {
+      this.users= this.users.filter(user => user.id != id)
+    })
+    .catch(error => console.log(error))
+  }
+
 }

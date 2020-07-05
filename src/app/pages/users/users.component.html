@@ -8,9 +8,7 @@
     </div>
 </div>
 
-<!-- <div class="users" *ngFor="let user of users; index as i" routerLink="{{user.id}}">
-    <p>Name: {{user.name}}</p>
-    <p>Courses:</p>
+<!--<p>Courses:</p>
     <ul>
         <li *ngFor="let nameOfCourse of nameOfCourses[i]">{{nameOfCourse}}</li>
     </ul>
@@ -34,12 +32,10 @@
         </div>
 
         <div class="users-footer">
-            <!-- <button routerLink="{{user.id}}" id="editIcon" > </button>  -->
-            <button routerLink="{{user.id}}" id="checkIcon"> </button>  <!-- (click)=(contacted(user)) -->
-           <button  id="deleteIcon" > </button>  <!--  (click)="deletePerson(i) -->
+            <button routerLink="{{user.id}}" id="checkIcon"> </button>  
+           <button (click)="deleteUser(user.id)" id="deleteIcon" > </button> 
         </div>
 
-</div>
+    </div>
    
-    
 </div>

@@ -78,6 +78,13 @@ export class ApiManagerService {
     return Promise.all(promises);
   }
 
+  // metodo para elimiar a un usuario - actualmente no se comprueba persona
+  public async deleteUser(id) {
+    return await axios.delete(`${this.urlUsers}/${id}`)
+    .then(res => res.data)
+    .catch(error => console.log(error))
+  }
+
   public insertUser(newUser:User): Promise<User[]>{
     return axios.post(this.urlUsers, newUser)
     .then(response => response.data)
