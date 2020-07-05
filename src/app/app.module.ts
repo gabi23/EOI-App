@@ -12,6 +12,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatDialogModule} from '@angular/material/dialog';
 import { DialogComponent } from './components/dialog/dialog.component';
 import {MatFormFieldModule} from '@angular/material/form-field'
+import {MatButtonModule} from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
+
 
 @NgModule({
   declarations: [
@@ -29,6 +32,8 @@ import {MatFormFieldModule} from '@angular/material/form-field'
     FormsModule,
     MatDialogModule,
     MatFormFieldModule,
+    MatButtonModule,
+    MatInputModule,
     BrowserAnimationsModule
   ],
   entryComponents: [

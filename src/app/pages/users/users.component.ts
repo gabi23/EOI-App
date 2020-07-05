@@ -3,6 +3,7 @@ import { User, Course, ApiManagerService } from '../../services/api-manager.serv
 import {MatDialog} from '@angular/material/dialog';
 import {DialogComponent} from '../../components/dialog/dialog.component';
 
+
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',
@@ -15,6 +16,7 @@ export class UsersComponent implements OnInit {
   nameOfCourses: string[][] = [];
   courseSelected: string = "All courses";
   userToSearch: string = "";
+  safeWord : string;
 
   constructor(private apiManagerServices: ApiManagerService, public dialog: MatDialog) {
     this.loadUsers();
@@ -23,9 +25,18 @@ export class UsersComponent implements OnInit {
 
   ngOnInit(): void { }
 
-  openDialog(): void {
-    const dialogRef = this.dialog.open(DialogComponent);
-
+  openDialog(id : number): void {
+    const dialogRef = this.dialog.open(DialogComponent, {
+      width: '275px',
+      data: {name: this.safeWord},
+      
+      
+    });
+   
+    dialogRef.afterClosed().subscribe(result => {
+      this.safeWord = result;
+      this.deleteUser(id);
+    });
   }
 
   async loadUsers(): Promise<void> {
@@ -67,11 +78,14 @@ export class UsersComponent implements OnInit {
   }
 
   deleteUser(id : number) {
-    this.apiManagerServices.deleteUser(id)
-    .then(res => {
-      this.users= this.users.filter(user => user.id != id)
-    })
-    .catch(error => console.log(error))
+    if (this.safeWord == "admin1234") { // falta añadir la palabra de seguridad de la persona tambien
+      this.apiManagerServices.deleteUser(id)
+      .then(res => {
+        this.users= this.users.filter(user => user.id != id)
+      })
+      .catch(error => console.log(error))
+    }
+    this.safeWord = "";
   }
 
 }
