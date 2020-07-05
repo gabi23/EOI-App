@@ -3,7 +3,6 @@ import { User, Course, ApiManagerService } from '../../services/api-manager.serv
 import {MatDialog} from '@angular/material/dialog';
 import {DialogComponent} from '../../components/dialog/dialog.component';
 
-
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',
