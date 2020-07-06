@@ -32,6 +32,8 @@ export class RegisterComponent implements OnInit {
 
   errorPhoneBoolean: boolean = false;
 
+  errorRoleBoolean: boolean = false;
+
   errorName: string = "";
 
   errorEmail: string = "";
@@ -39,6 +41,8 @@ export class RegisterComponent implements OnInit {
   errorSurname: string = "";
 
   errorPhone: string = "";
+
+  errorRole: string = "";
 
   constructor(private ApiManagerService: ApiManagerService) {
 
@@ -85,12 +89,16 @@ export class RegisterComponent implements OnInit {
       this.errorPhoneBoolean = true;
       this.errorPhone = "The number isn't correct";
     } else { this.errorPhoneBoolean = false; }
-
-    // if (this.pohoneValid.test(this.newUser.phone)) {
-    //   this.errorPhoneBoolean = true;
-    //   this.errorPhone = "The number phone isn't correct";
-    // } else {
-    //   this.errorPhoneBoolean = false;
-    // }
   }
+
+  validationRole() {
+    if (this.newUser.role == "admin123") {
+      this.errorRoleBoolean = true;
+      this.errorRole = "Secret word is correct, you are admin"
+    } else {
+      this.errorRoleBoolean = false;
+      this.errorRole = "Secret word invalid, you are user"
+    }
+  }
+
 }
