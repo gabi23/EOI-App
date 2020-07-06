@@ -25,7 +25,7 @@ export class UsersComponent implements OnInit {
 
   ngOnInit(): void { }
 
-  openDialog(id : number): void {
+  openDialogDelete(user : User): void {
     const dialogRef = this.dialog.open(DialogComponent, {
       width: '275px',
       data: {name: this.safeWord},
@@ -35,7 +35,7 @@ export class UsersComponent implements OnInit {
    
     dialogRef.afterClosed().subscribe(result => {
       this.safeWord = result;
-      this.deleteUser(id);
+      this.deleteUser(user);
     });
   }
 
@@ -77,11 +77,11 @@ export class UsersComponent implements OnInit {
     }    
   }
 
-  deleteUser(id : number) {
-    if (this.safeWord == "admin1234") { // falta añadir la palabra de seguridad de la persona tambien
-      this.apiManagerServices.deleteUser(id)
+  deleteUser(user : User) {
+    if (this.safeWord == "admin1234" || this.safeWord == user.safeWord) { // falta añadir la palabra de seguridad de la persona tambien
+      this.apiManagerServices.deleteUser(user.id)
       .then(res => {
-        this.users= this.users.filter(user => user.id != id)
+        this.users= this.users.filter(aux => aux.id != user.id)
       })
       .catch(error => console.log(error))
     }

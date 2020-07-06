@@ -19,6 +19,7 @@ export class DialogComponent {
     @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
 
   onNoClick(): void {
+    this.data = {safeWord: ""};
     this.dialogRef.close();
   }
 

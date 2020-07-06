@@ -30,15 +30,16 @@
             </div>
 
             <div class="user-header-text">
-                <span id="bold"> {{user.name}} </span>
-                <span> {{user.email}} </span>
-                <span> {{user.telefono}} </span>
+                <span id="bold"> {{user.name}} {{user.surname}} </span>
+                <span> {{user.email}}  </span>
+                <span> {{user.phone}} </span>
             </div>
         </div>
 
         <div class="users-footer">
+            <button id="editIcon" routerLink="{{user.id}}" ></button>  <!-- Por ahora simplemente se hace un router link a usuario -->
             <button routerLink="{{user.id}}" id="checkIcon"> </button>  
-           <button  (click)="openDialog(user.id)" id="deleteIcon" > </button> 
+           <button  (click)="openDialogDelete(user)" id="deleteIcon" > </button> 
         </div>
 
     </div>
