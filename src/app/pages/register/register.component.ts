@@ -18,6 +18,8 @@ export class RegisterComponent implements OnInit {
   email : "",
   role : "" }
 
+  emailValid = new RegExp(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/);
+
   errorNameBoolean: boolean = false;
   
   errorEmailBoolean: boolean = false;
@@ -59,9 +61,9 @@ export class RegisterComponent implements OnInit {
       this.errorSurnameBoolean = false;
     }
   }
-
+    // if (!this.emailValid.test(this.email))
   validationEmail() {
-    if (!this.newUser.email.includes("@")) {
+    if (!this.emailValid.test(this.newUser.email)) {
       this.errorEmailBoolean = true;
       this.errorEmail = "The email isn't correct";
     } else {
