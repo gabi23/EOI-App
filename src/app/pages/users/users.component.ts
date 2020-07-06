@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { User, Course, ApiManagerService } from '../../services/api-manager.service';
 import {MatDialog} from '@angular/material/dialog';
 import {DialogComponent} from '../../components/dialog/dialog.component';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -18,7 +19,7 @@ export class UsersComponent implements OnInit {
   userToSearch: string = "";
   safeWord : string;
 
-  constructor(private apiManagerServices: ApiManagerService, public dialog: MatDialog) {
+  constructor(private apiManagerServices: ApiManagerService, public dialog: MatDialog, public router: Router) {
     this.loadUsers();
     this.loadCourses();
   }
@@ -36,6 +37,24 @@ export class UsersComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       this.safeWord = result;
       this.deleteUser(user);
+    });
+  }
+
+  //Dialogo para editar
+  openDialogEdit(user : User): void {
+    const dialogRef = this.dialog.open(DialogComponent, {
+      width: '275px',
+      data: {name: this.safeWord},
+      
+      
+    });
+   
+    dialogRef.afterClosed().subscribe(result => {
+      
+      if (result == "admin1234" || result == user.safeWord) {
+        this.router.navigate(['users', user.id])
+      }
+      
     });
   }
 

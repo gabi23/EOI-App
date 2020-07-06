@@ -37,7 +37,7 @@
         </div>
 
         <div class="users-footer">
-            <button id="editIcon" routerLink="{{user.id}}" ></button>  <!-- Por ahora simplemente se hace un router link a usuario -->
+            <button (click)="openDialogEdit(user)" id="editIcon" ></button>  <!-- Por ahora simplemente se hace un router link a usuario -->
             <button routerLink="{{user.id}}" id="checkIcon"> </button>  
            <button  (click)="openDialogDelete(user)" id="deleteIcon" > </button> 
         </div>
