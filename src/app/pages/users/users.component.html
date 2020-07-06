@@ -1,12 +1,17 @@
 <div class="header">
     <div class="search"> 
         <input type="text" name="userToSearch" placeholder="Busca los alumnos..." [(ngModel)]="userToSearch" (input)="searchUser()"/>
-        <select class="" name="select-course" [(ngModel)]="courseSelected" (change)="courseFilter()">
-            <option value="All courses">All courses</option>
-            <option *ngFor="let course of courses" value="{{course.name}}">{{course.name}}</option>
-        </select>
+        <mat-form-field appearance="fill">
+            <mat-label>Select an option</mat-label>
+            <mat-select [(value)]="courseSelected" (selectionChange)="courseFilter()">
+              <mat-option value="All courses">All courses</mat-option>
+              <mat-option *ngFor="let course of courses" value="{{course.name}}">{{course.name}}</mat-option>
+            </mat-select>
+          </mat-form-field>
     </div>
 </div>
+
+
 
 <!--  <p>Courses:</p>
     <ul>
