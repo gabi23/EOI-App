@@ -32,6 +32,13 @@
     <span *ngIf="errorEmailBoolean">{{errorEmail}}</span>
     <br><br>
 
+    <input type="text"
+    placeholder="Phone" 
+    [(ngModel)]="newUser.phone"
+    (keyup)="validationPhone()">
+    <br><br>
+    <span *ngIf="errorPhoneBoolean">{{errorPhone}}</span>
+    <br><br>
 
     <button (click)="addNewUser()">Add User</button>
 </body>

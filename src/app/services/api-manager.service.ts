@@ -6,7 +6,7 @@ export type User = {
   name: string,
   surname: string,
   email: string,
-  phone?: number,
+  phone?: string,
   role: string,
   safeWord?: string,  // A falta de generar la "pass" al registrar
   courses?: number[],

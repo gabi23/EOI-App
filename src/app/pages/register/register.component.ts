@@ -13,24 +13,32 @@ export class RegisterComponent implements OnInit {
 
   users: [] = [];
 
-  newUser: User = {name : "", 
-  surname : "", 
-  email : "",
-  role : "" }
+  newUser: User = {
+    name: "",
+    surname: "",
+    email: "",
+    role: ""
+  }
 
   emailValid = new RegExp(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/);
 
+  pohoneValid = new RegExp("/^([0-9]{9})*$/");
+
   errorNameBoolean: boolean = false;
-  
+
   errorEmailBoolean: boolean = false;
-  
+
   errorSurnameBoolean: boolean = false;
+
+  errorPhoneBoolean: boolean = false;
 
   errorName: string = "";
 
-  errorEmail: string= "";
+  errorEmail: string = "";
 
-  errorSurname: string= "";
+  errorSurname: string = "";
+
+  errorPhone: string = "";
 
   constructor(private ApiManagerService: ApiManagerService) {
 
@@ -61,7 +69,7 @@ export class RegisterComponent implements OnInit {
       this.errorSurnameBoolean = false;
     }
   }
-    // if (!this.emailValid.test(this.email))
+
   validationEmail() {
     if (!this.emailValid.test(this.newUser.email)) {
       this.errorEmailBoolean = true;
@@ -71,6 +79,18 @@ export class RegisterComponent implements OnInit {
     }
   }
 
+  validationPhone() {
 
+    if(!this.pohoneValid.test(this.newUser.phone)){
+      this.errorPhoneBoolean=true;
+      this.errorPhone="Only numbres please"
+    }else{this.errorPhoneBoolean=false;}
 
+    // if (this.pohoneValid.test(this.newUser.phone)) {
+    //   this.errorPhoneBoolean = true;
+    //   this.errorPhone = "The number phone isn't correct";
+    // } else {
+    //   this.errorPhoneBoolean = false;
+    // }
+  }
 }
