@@ -22,7 +22,7 @@ export class RegisterComponent implements OnInit {
 
   emailValid = new RegExp(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/);
 
-  pohoneValid = new RegExp("/^([0-9]{9})*$/");
+  pohoneValid = new RegExp(/^\d+$/);
 
   errorNameBoolean: boolean = false;
 
@@ -81,10 +81,10 @@ export class RegisterComponent implements OnInit {
 
   validationPhone() {
 
-    if(!this.pohoneValid.test(this.newUser.phone)){
-      this.errorPhoneBoolean=true;
-      this.errorPhone="Only numbres please"
-    }else{this.errorPhoneBoolean=false;}
+    if (!this.pohoneValid.test(this.newUser.phone)){
+      this.errorPhoneBoolean = true;
+      this.errorPhone = "Only numbres please";
+    } else { this.errorPhoneBoolean = false; }
 
     // if (this.pohoneValid.test(this.newUser.phone)) {
     //   this.errorPhoneBoolean = true;
