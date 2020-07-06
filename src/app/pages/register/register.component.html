@@ -13,8 +13,15 @@
     [(ngModel)]="newUser.name"
     (keyup)="validationName()">
     <br><br>
-
     <span *ngIf="errorNameBoolean">{{errorName}}</span>
+    <br><br>
+
+    <input type="text"
+    placeholder="Surname" 
+    [(ngModel)]="newUser.surname"
+    (keyup)="validationSurname()">
+    <br><br>
+    <span *ngIf="errorSurnameBoolean">{{errorSurname}}</span>
     <br><br>
 
     <input type="email"
@@ -22,9 +29,10 @@
     [(ngModel)]="newUser.email"
     (keyup)="validationEmail()">
     <br><br>
-
     <span *ngIf="errorEmailBoolean">{{errorEmail}}</span>
     <br><br>
+
+
     <button (click)="addNewUser()">Add User</button>
 </body>
 

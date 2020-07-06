@@ -22,9 +22,13 @@ export class RegisterComponent implements OnInit {
   
   errorEmailBoolean: boolean = false;
   
+  errorSurnameBoolean: boolean = false;
+
   errorName: string = "";
 
   errorEmail: string= "";
+
+  errorSurname: string= "";
 
   constructor(private ApiManagerService: ApiManagerService) {
 
@@ -37,6 +41,7 @@ export class RegisterComponent implements OnInit {
       .then(i => i)
       .catch((error) => { console.log(error) });
   }
+
   validationName() {
     if (this.newUser.name.length < 2 || this.newUser.name.length > 30) {
       this.errorNameBoolean = true;
@@ -45,6 +50,16 @@ export class RegisterComponent implements OnInit {
       this.errorNameBoolean = false;
     }
   }
+
+  validationSurname() {
+    if (this.newUser.surname.length < 2 || this.newUser.surname.length > 30) {
+      this.errorSurnameBoolean = true;
+      this.errorSurname = "The surname must have between 2 to 30 characters";
+    } else {
+      this.errorSurnameBoolean = false;
+    }
+  }
+
   validationEmail() {
     if (!this.newUser.email.includes("@")) {
       this.errorEmailBoolean = true;
@@ -53,4 +68,7 @@ export class RegisterComponent implements OnInit {
       this.errorEmailBoolean = false;
     }
   }
+
+
+
 }
