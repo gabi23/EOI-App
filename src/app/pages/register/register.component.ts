@@ -81,9 +81,9 @@ export class RegisterComponent implements OnInit {
 
   validationPhone() {
 
-    if (!this.pohoneValid.test(this.newUser.phone)){
+    if (!this.pohoneValid.test(this.newUser.phone) || this.newUser.phone.length != 9) {
       this.errorPhoneBoolean = true;
-      this.errorPhone = "Only numbres please";
+      this.errorPhone = "The number isn't correct";
     } else { this.errorPhoneBoolean = false; }
 
     // if (this.pohoneValid.test(this.newUser.phone)) {
