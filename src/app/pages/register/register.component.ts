@@ -11,11 +11,12 @@ import { User } from '../../services/api-manager.service';
 })
 export class RegisterComponent implements OnInit {
 
-
-
   users: [] = [];
 
-  newUser: User = { name: "", email: "" }
+  newUser: User = {name : "", 
+  surname : "", 
+  email : "",
+  role : "" }
 
   errorNameBoolean: boolean = false;
   
@@ -28,8 +29,6 @@ export class RegisterComponent implements OnInit {
   constructor(private ApiManagerService: ApiManagerService) {
 
   }
-
-
 
   ngOnInit(): void { }
 

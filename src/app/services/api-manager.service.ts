@@ -2,18 +2,26 @@ import { Injectable } from '@angular/core';
 import axios from 'axios';
 
 export type User = {
-  id ?: number,
-  name : string,
-  email : string,
-  courses ?: []
-}
+  id?: number, 
+  name: string,
+  surname: string,
+  email: string,
+  phone?: number,
+  role: string,
+  safeWord?: string,  // A falta de generar la "pass" al registrar
+  courses?: number[],
+  gitHubLogin? : string
+};
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiManagerService {
 
-  newUser: User = {name : "", email : ""}
+  newUser: User = {name : "", 
+  surname : "", 
+  email : "",
+  role : "" }
 
 
   
