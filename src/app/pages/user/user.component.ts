@@ -13,7 +13,7 @@ import { ActivatedRoute, Params } from '@angular/router';
   styleUrls: ['./user.component.scss']
 })
 export class UserComponent implements OnInit {
-  user = {}; 
+  user : User; 
   courses : Course []; 
   repos : any[];
 

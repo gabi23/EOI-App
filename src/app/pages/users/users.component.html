@@ -1,30 +1,47 @@
-<div class="">
-    <input  type="text" name="userToSearch" placeholder="Name" [(ngModel)]="userToSearch"/>
-    <button type="button" (click)="searchUser()" title="Search contact">Search</button>
-    <select class="" *ngIf="userFound.length == 0" name="select-course" (change)="courseSelected()" [(ngModel)]="course">
-        <option value="All courses">All courses</option>
-        <option *ngFor="let course of courses" value="{{course.name}}">{{course.name}}</option>
-    </select>
-    <button *ngIf="userFound.length > 0" (click)="back()">Back</button>
-</div>
-
-<div *ngIf="userFound.length == 0 && course=='All courses'">
-    <div class="users" *ngFor="let user of users" routerLink="{{user.id}}">
-        <p>Name: {{user.name}}</p>
-        <p>Courses: {{user.courses}}</p>
+<div class="header">
+    <div class="search"> 
+        <input type="text" name="userToSearch" placeholder="Busca los alumnos..." [(ngModel)]="userToSearch" (input)="searchUser()"/>
+        <mat-form-field appearance="fill">
+            <mat-label>Select an option</mat-label>
+            <mat-select [(value)]="courseSelected" (selectionChange)="courseFilter()">
+              <mat-option value="All courses">All courses</mat-option>
+              <mat-option *ngFor="let course of courses" value="{{course.name}}">{{course.name}}</mat-option>
+            </mat-select>
+          </mat-form-field>
     </div>
 </div>
 
-<div *ngIf="userFound.length == 0 && usersInCourse.length > 0">
-    <div class="users" *ngFor="let user of usersInCourse" routerLink="{{user.id}}">
-        <p>Name: {{user.name}}</p>
-        <p>Courses: {{user.courses}}</p>
-    </div>
-</div>
 
-<div *ngIf="userFound.length > 0">
-    <div class="users" *ngFor="let user of userFound" routerLink="{{user.id}}">
-        <p>Name: {{user.name}}</p>
-        <p>Courses: {{user.courses}}</p>
+
+<!--  <p>Courses:</p>
+    <ul>
+        <li *ngFor="let nameOfCourse of nameOfCourses[i]">{{nameOfCourse}}</li>
+    </ul>
+</div> -->
+
+<div class="users">
+    <div 
+    *ngFor="let user of users; index as i" 
+    class="user-users">
+
+        <div  class="user-header">
+            <div class="user-header-picture centered">
+                <div class="circulo"></div>
+            </div>
+
+            <div class="user-header-text">
+                <span id="bold"> {{user.name}} {{user.surname}} </span>
+                <span> {{user.email}}  </span>
+                <span> {{user.phone}} </span>
+            </div>
+        </div>
+
+        <div class="users-footer">
+            <button (click)="openDialogEdit(user)" id="editIcon" ></button>  <!-- Por ahora simplemente se hace un router link a usuario -->
+            <button routerLink="{{user.id}}" id="checkIcon"> </button>  
+           <button  (click)="openDialogDelete(user)" id="deleteIcon" > </button> 
+        </div>
+
     </div>
+   
 </div>

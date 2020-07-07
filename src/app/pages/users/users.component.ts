@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { User, Course, ApiManagerService } from '../../services/api-manager.service';
+import {MatDialog} from '@angular/material/dialog';
+import {DialogComponent} from '../../components/dialog/dialog.component';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-users',
@@ -10,47 +14,97 @@ export class UsersComponent implements OnInit {
 
   users: User[] = [];
   courses: Course[] = [];
+  nameOfCourses: string[][] = [];
+  courseSelected: string = "All courses";
   userToSearch: string = "";
-  userFound: User[] = [];
-  course: string = "All courses";
-  usersInCourse: User[] = [];
+  safeWord : string;
 
-  constructor(private apiManagerServices: ApiManagerService) {
+  constructor(private apiManagerServices: ApiManagerService, public dialog: MatDialog, public router: Router) {
     this.loadUsers();
     this.loadCourses();
   }
 
   ngOnInit(): void { }
 
+  openDialogDelete(user : User): void {
+    const dialogRef = this.dialog.open(DialogComponent, {
+      width: '275px',
+      data: {name: this.safeWord},
+      
+      
+    });
+   
+    dialogRef.afterClosed().subscribe(result => {
+      this.safeWord = result;
+      this.deleteUser(user);
+    });
+  }
+
+  //Dialogo para editar
+  openDialogEdit(user : User): void {
+    const dialogRef = this.dialog.open(DialogComponent, {
+      width: '275px',
+      data: {name: this.safeWord},
+      
+      
+    });
+   
+    dialogRef.afterClosed().subscribe(result => {
+      
+      if (result == "admin1234" || result == user.safeWord) {
+        this.router.navigate(['users', user.id])
+      }
+      
+    });
+  }
+
   async loadUsers(): Promise<void> {
-    const users = await this.apiManagerServices.getAllUsers();
-    this.users = users;
+    this.users = await this.apiManagerServices.getAllUsers();
   }
 
   async loadCourses(): Promise<void> {
-    const courses = await this.apiManagerServices.getCourses();
-    this.courses = courses;
+    this.courses = await this.apiManagerServices.getCourses();
+    this.users.forEach(user => {
+      this.apiManagerServices.getUserCourses(user.courses)
+        .then(courses => {
+          this.nameOfCourses.push(courses.map(course => course.name));
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    });
   }
 
-  searchUser(){
-    this.userFound = [];
-    if(this.userToSearch != ""){
-      this.users.forEach(user => {
-        if(user.name.toLowerCase().includes(this.userToSearch.toLowerCase())){
-            this.userFound.push(user);
-        }
-      });
+  async searchUser(){
+    this.users = [];
+    this.nameOfCourses = [];
+    this.users = await this.apiManagerServices.getUserByName(this.userToSearch);
+    this.loadCourses();
+  }
+
+  async courseFilter(){
+    if(this.courseSelected != "All courses"){
+      this.users = [];
+      this.nameOfCourses = [];
+      const course = await this.apiManagerServices.getCourseByName(this.courseSelected);
+      this.users = await this.apiManagerServices.getUsersByCourses(course[0].id);
+      this.loadCourses();
+    }
+    else{
+      this.loadUsers();
+      this.loadCourses();
     }    
   }
 
-  back(){
-    this.userFound = [];
-    this.userToSearch = "";
-  }
-
-  courseSelected(){
-    this.usersInCourse = [];
-    this.usersInCourse = this.users.filter(user => user.courses.includes(this.course));
+  deleteUser(user : User) {
+    if (this.safeWord == "admin1234" || this.safeWord == user.safeWord) { // falta añadir la palabra de seguridad de la persona tambien
+      this.apiManagerServices.deleteUser(user.id)
+      .then(res => {
+        this.users= this.users.filter(aux => aux.id != user.id)
+      })
+      .catch(error => console.log(error))
+    }
+    this.safeWord = "";
   }
 
 }

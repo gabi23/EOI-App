@@ -1,0 +1,11 @@
+<div mat-dialog-content> Introduzca la palabra de seguridad</div>
+<mat-form-field>
+    <mat-label>Palabra secreta</mat-label>
+    <input matInput type="password" [(ngModel)]="data.safeWord" />
+
+    
+</mat-form-field>
+<div mat-dialog-actions>
+    <button mat-button (click)="onNoClick()">Cancelar</button>
+    <button mat-button [mat-dialog-close]="data.safeWord" >Confirmar</button>
+</div>
