@@ -72,10 +72,24 @@ export class ApiManagerService {
     return users;
   }
   
-  public getUserCourses( ids : number []): Promise<Course[]>{
+  public getUserCourses(ids:number[]): Promise<Course[]>{
     const promises = ids.map( id => axios.get(`${this.urlCourses}/${id}`)
     .then(r => r.data));
     return Promise.all(promises);
+  }
+
+  public findEmail(email:string): Promise<User[]>{
+    const user = axios.get(`${this.urlUsers}?email=${email}`)
+      .then(response => response.data)
+      .catch(error => console.log(error));
+    return user;
+  }
+
+  public updateUser(id:number, updatedUser:User): Promise<User[]>{
+    const user = axios.patch(`${this.urlUsers}/${id}`, updatedUser)
+      .then(response => response.data)
+      .catch(error => console.log(error));
+    return user;
   }
 
   // metodo para elimiar a un usuario - actualmente no se comprueba persona
