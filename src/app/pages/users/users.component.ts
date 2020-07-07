@@ -26,12 +26,10 @@ export class UsersComponent implements OnInit {
 
   ngOnInit(): void { }
 
-  openDialogDelete(user : User): void {
+  openDialogDelete(user: User): void {
     const dialogRef = this.dialog.open(DialogComponent, {
       width: '275px',
-      data: {name: this.safeWord},
-      
-      
+      data: {name: this.safeWord},      
     });
    
     dialogRef.afterClosed().subscribe(result => {
@@ -41,20 +39,16 @@ export class UsersComponent implements OnInit {
   }
 
   //Dialogo para editar
-  openDialogEdit(user : User): void {
+  openDialogEdit(user: User): void {
     const dialogRef = this.dialog.open(DialogComponent, {
       width: '275px',
-      data: {name: this.safeWord},
-      
-      
+      data: {name: this.safeWord},      
     });
    
-    dialogRef.afterClosed().subscribe(result => {
-      
+    dialogRef.afterClosed().subscribe(result => {      
       if (result == "admin1234" || result == user.safeWord) {
-        this.router.navigate(['users', user.id])
-      }
-      
+        this.router.navigate(['users/edit', user.id])
+      }      
     });
   }
 
@@ -96,7 +90,7 @@ export class UsersComponent implements OnInit {
     }    
   }
 
-  deleteUser(user : User) {
+  deleteUser(user: User) {
     if (this.safeWord == "admin1234" || this.safeWord == user.safeWord) { // falta añadir la palabra de seguridad de la persona tambien
       this.apiManagerServices.deleteUser(user.id)
       .then(res => {
