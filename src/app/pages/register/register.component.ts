@@ -25,8 +25,12 @@ export class RegisterComponent implements OnInit {
   ngOnInit(): void {}
 
   addNewUser(){
+
+    this.ApiManagerService.sendMessage(this.newUser);
+
     this.ApiManagerService.insertUser(this.newUser)
     .then(i => i)
     .catch((error) => {console.log(error)});
   }
+
 }

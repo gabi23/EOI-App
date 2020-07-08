@@ -28,8 +28,13 @@ export type Course = {
 export class ApiManagerService {
   urlUsers = "http://localhost:3000/users"
   urlCourses = "http://localhost:3000/courses"
+  urlSendMail = "http://localhost:3001/sendmail"
   
   constructor() { }
+
+  sendMessage(body) {
+    return axios.post(this.urlSendMail, body);
+  }
 
   async getUser(id : number) : Promise <User> {
     return await axios.get(`${this.urlUsers}/${id}`)
