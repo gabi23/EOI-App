@@ -4,3 +4,18 @@
 <ul *ngFor="let course of courses" >
   <li>{{course.name}}</li>
 </ul>
+<h2>Repositorios:</h2>
+<section id="repositories"> 
+  
+  <article class="repository"  *ngFor="let repo of repos">
+    <a href={{repo.html_url}}>
+        <h3>{{repo.name}}</h3>
+        <h4>Descripción:</h4>
+        <p>{{repo.description}}</p> 
+        <h4>Lenguajes:</h4>
+        <p>{{repo.language}}</p> 
+    </a> 
+  </article>
+  
+</section> 
+
