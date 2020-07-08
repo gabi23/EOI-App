@@ -46,7 +46,7 @@ export class UsersComponent implements OnInit {
     });
    
     dialogRef.afterClosed().subscribe(result => {      
-      if (result == "admin1234" || result == user.safeWord) {
+      if ( (result == "admin1234" || result == user.safeWord) && result != undefined) {
         this.router.navigate(['users/edit', user.id])
       }      
     });
