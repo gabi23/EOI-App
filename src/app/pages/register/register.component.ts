@@ -12,7 +12,7 @@ export class RegisterComponent implements OnInit {
 
   users: [] = [];
   
-  newUser: User = {name : "", surname : "",  email : "" , role: "", }
+  newUser: User = {name : "", surname : "",  email : "" , role: ""}
 
   newCourse: Course = { name: "", studyField: "", description: ""}
 

@@ -9,7 +9,7 @@ export type User = {
   phone?: number,
   role: string,
   safeWord?: string,  // A falta de generar la "pass" al registrar
-  courses?: number[],
+  courses?: number[], // array de ids
   gitHubLogin? : string
 };
 
