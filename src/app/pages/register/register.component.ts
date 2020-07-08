@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import axios from 'axios';
 import { ApiManagerService } from '../../services/api-manager.service';
 import { User } from '../../services/api-manager.service';
-
+import { Course } from '../../services/api-manager.service';
 
 @Component({
   selector: 'app-register',
@@ -20,9 +19,15 @@ export class RegisterComponent implements OnInit {
     role: ""
   }
 
+  newCourse: Course = {
+    name: "",
+    studyField: "",
+    description: ""
+  }
+
   emailValid = new RegExp(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/);
 
-  pohoneValid = new RegExp(/^\d+$/);
+  numberValid = new RegExp(/^\d+$/);
 
   errorNameBoolean: boolean = false;
 
@@ -63,6 +68,7 @@ export class RegisterComponent implements OnInit {
     } else {
       this.errorNameBoolean = false;
     }
+    
   }
 
   validationSurname() {
@@ -85,20 +91,20 @@ export class RegisterComponent implements OnInit {
 
   validationPhone() {
 
-    if (!this.pohoneValid.test(this.newUser.phone) || this.newUser.phone.length != 9) {
+    if (!this.numberValid.test(this.newUser.phone) || this.newUser.phone.length != 9) {
       this.errorPhoneBoolean = true;
       this.errorPhone = "The number isn't correct";
     } else { this.errorPhoneBoolean = false; }
   }
 
-  validationRole() {
-    if (this.newUser.role == "admin123") {
-      this.errorRoleBoolean = true;
-      this.errorRole = "Secret word is correct, you are admin"
-    } else {
-      this.errorRoleBoolean = false;
-      this.errorRole = "Secret word invalid, you are user"
-    }
-  }
+  // validationRole() {
+  //   if (this.newUser.role == "admin123") {
+  //     this.errorRoleBoolean = true;
+  //     this.errorRole = "Secret word is correct, you are admin"
+  //   } else {
+  //     this.errorRoleBoolean = false;
+  //     this.errorRole = "Secret word invalid, you are user"
+  //   }
+  // }
 
 }

@@ -13,6 +13,13 @@ export type User = {
   gitHubLogin? : string
 };
 
+export type Course = {
+  id?: number, 
+  name: string,
+  studyField: string, // Posiblemente comprobar cambios más adelante
+  description: string
+};
+
 @Injectable({
   providedIn: 'root'
 })
@@ -23,6 +30,11 @@ export class ApiManagerService {
   email : "",
   role : "" }
 
+  newCourse: Course = {
+    name: "",
+    studyField: "",
+    description: ""
+  }
 
   
   constructor() { }
