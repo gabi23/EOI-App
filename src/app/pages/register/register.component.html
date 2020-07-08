@@ -1,4 +1,6 @@
 <body>
+    <h2>Add User</h2><br><br>
+
     <input type="text" 
     placeholder="Name" 
     [(ngModel)]="newUser.name"
@@ -31,13 +33,18 @@
     <span *ngIf="errorPhoneBoolean">{{errorPhone}}</span>
     <br><br>
 
-    <!-- <input type="text"
-    placeholder="Role" 
-    [(ngModel)]="newUser.role"
-    (keyup)="validationRole()">
+    <input type="text"
+    placeholder="GitHub" 
+    [(ngModel)]="newUser.gitHubLogin">
     <br><br>
-    <span *ngIf="errorRoleBoolean">{{errorRole}}</span>
-    <br><br> -->
 
     <button (click)="addNewUser()">Add User</button>
+
+    <h2>Add Course</h2><br><br>
+
+    <input type="text"
+    placeholder="Course name" 
+    [(ngModel)]="newCourses.name">
+    <br><br>
+
 </body>

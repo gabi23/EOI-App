@@ -12,9 +12,9 @@ export class RegisterComponent implements OnInit {
 
   users: [] = [];
   
-  newUser: User = {name : "", surname : "",  email : "" , role: ""}
+  newCourses: Course[] = [{name: "", studyField: "", description: ""}];
 
-  newCourse: Course = { name: "", studyField: "", description: ""}
+  newUser: User = {name : "", surname : "",  email : "" , role: "", courses: [], gitHubLogin: ""}
 
   emailValid = new RegExp(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/);
 
@@ -28,8 +28,6 @@ export class RegisterComponent implements OnInit {
 
   errorPhoneBoolean: boolean = false;
 
-  errorRoleBoolean: boolean = false;
-
   errorName: string = "";
 
   errorEmail: string = "";
@@ -37,8 +35,6 @@ export class RegisterComponent implements OnInit {
   errorSurname: string = "";
 
   errorPhone: string = "";
-
-  errorRole: string = "";
 
   constructor(private ApiManagerService: ApiManagerService) {
 
@@ -87,15 +83,4 @@ export class RegisterComponent implements OnInit {
       this.errorPhone = "The number isn't correct";
     } else { this.errorPhoneBoolean = false; }
   }
-
-  // validationRole() {
-  //   if (this.newUser.role == "admin123") {
-  //     this.errorRoleBoolean = true;
-  //     this.errorRole = "Secret word is correct, you are admin"
-  //   } else {
-  //     this.errorRoleBoolean = false;
-  //     this.errorRole = "Secret word invalid, you are user"
-  //   }
-  // }
-
 }
