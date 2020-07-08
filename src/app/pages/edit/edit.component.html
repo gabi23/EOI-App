@@ -1,0 +1,48 @@
+<h2>Edit User</h2>
+<label for="newName">
+    <pre>Name</pre>
+    <input type="text" name="newName" placeholder={{user.name}} (keyup.enter)="updateUser()"
+        (focus)="nameOnFocus()" (blur)="validateName()" [(ngModel)]="newName" [class.error]="errorInNewName==true"/>
+    <p class="errors" *ngIf="errorInNewName==true">{{ nameErrorMesagge }}</p>
+</label>
+
+<label for="newSurname">
+    <pre>Surname</pre>
+    <input type="text" name="newSurname" placeholder={{user.surname}} (keyup.enter)="updateUser()"
+        (focus)="nameOnFocus()" (blur)="validateSurname()" [(ngModel)]="newSurname" [class.error]="errorInNewSurname==true" />
+    <p class="errors" *ngIf="errorInNewSurname==true">{{ surnameErrorMesagge }}</p>
+</label>
+
+<label for="newEmail">
+    <pre>Email</pre>
+    <input type="email" name="newEmail" placeholder={{user.email}} (keyup.enter)="updateUser()"
+        (focus)="emailOnFocus()" (blur)="validateEmail()" [(ngModel)]="newEmail" [class.error]="errorInNewEmail==true" />
+    <p class="errors" *ngIf="errorInNewEmail==true">{{ emailErrorMesagge }}</p>
+</label>
+
+<label for="newPhone">
+    <pre>Phone</pre>
+    <input type="tel" name="newPhone" placeholder={{user.phone}} (keyup.enter)="updateUser()"
+        (focus)="phoneOnFocus()" (blur)="validatePhone()" [(ngModel)]="newPhone" [class.error]="errorInNewPhone==true" />
+    <p class="errors" *ngIf="errorInNewPhone==true">{{ phoneErrorMesagge }}</p>
+</label>
+
+<label for="newGitHubLogin">
+    <pre>GitHub Login</pre>
+    <input type="tel" name="newPhone" placeholder={{user.gitHubLogin}} (keyup.enter)="updateUser()"
+        (focus)="phoneOnFocus()" (blur)="validatePhone()" [(ngModel)]="newGitHubLogin" />
+</label>
+
+<div class="checkboxes">
+    <div *ngFor="let course of courses">
+        <input type="checkbox" [value]="course.id" [checked]=isChecked(course.id) (change)="onCheckboxChange($event)">
+        <label>{{course.name}}</label><br>
+    </div>
+</div>
+
+<div id="editButton">
+    <button id="updateButton" type='submit' (click)='updateUser()'>Update</button>
+    <!-- <div *ngIf="contactSave==true">
+        <span>El contacto se ha modificado con éxito</span>
+    </div> -->
+</div>

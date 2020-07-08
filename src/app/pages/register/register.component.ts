@@ -11,19 +11,10 @@ import { Course } from '../../services/api-manager.service';
 export class RegisterComponent implements OnInit {
 
   users: [] = [];
+  
+  newUser: User = {name : "", surname : "",  email : "" , role: "", }
 
-  newUser: User = {
-    name: "",
-    surname: "",
-    email: "",
-    role: ""
-  }
-
-  newCourse: Course = {
-    name: "",
-    studyField: "",
-    description: ""
-  }
+  newCourse: Course = { name: "", studyField: "", description: ""}
 
   emailValid = new RegExp(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/);
 
@@ -91,7 +82,7 @@ export class RegisterComponent implements OnInit {
 
   validationPhone() {
 
-    if (!this.numberValid.test(this.newUser.phone) || this.newUser.phone.length != 9) {
+    if (!this.numberValid.test(this.newUser.phone.toString()) || this.newUser.phone.toString().length != 9) {
       this.errorPhoneBoolean = true;
       this.errorPhone = "The number isn't correct";
     } else { this.errorPhoneBoolean = false; }
