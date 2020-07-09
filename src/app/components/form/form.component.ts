@@ -87,7 +87,6 @@ export class FormComponent implements OnInit {
         i++;
       });
     }
-    console.log(this.newCourses)
   }
 
   validateName() {
@@ -117,8 +116,7 @@ export class FormComponent implements OnInit {
   }
 
   async validateEmail() {
-    let aux = await this.apiManagerServices.findEmail(this.newEmail)
-    console.log(aux)
+    let aux = await this.apiManagerServices.findEmail(this.newEmail);
     if (!this.emailValid.test(this.newEmail)) {
       this.errorInNewEmail = true;
       this.emailErrorMesagge = "Must be user@server";
@@ -198,7 +196,10 @@ export class FormComponent implements OnInit {
       this.errorInNewName == false &&
       this.errorInNewSurname == false &&
       this.errorInNewEmail == false &&
-      this.errorInNewPhone == false
+      this.errorInNewPhone == false &&
+      this.newName.length > 0 &&
+      this.newSurname.length > 0 &&
+      this.newEmail.length > 0
     ){
       this.user.name = this.newName;
       this.user.surname = this.newSurname;
@@ -206,12 +207,12 @@ export class FormComponent implements OnInit {
       this.user.phone = this.newPhone;
       this.user.gitHubLogin = this.newGitHubLogin;
       this.user.courses = this.newCourses;
-      this.user.safeWord = this.safeWordGenerator();      
+      this.user.safeWord = this.safeWordGenerator();
+      await this.apiManagerServices.insertUser(this.user)
+      await this.apiManagerServices.sendMessage(this.user);
+      this.userAdded = true;
+      setTimeout(() => (this.userAdded = false), 3000);      
     }
-    await this.apiManagerServices.insertUser(this.user)
-    await this.apiManagerServices.sendMessage(this.user);
-    this.userAdded = true;
-    setTimeout(() => (this.userAdded = false), 3000);
   }
 
 }
