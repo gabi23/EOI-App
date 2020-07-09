@@ -9,10 +9,8 @@ import { Course } from '../../services/api-manager.service';
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent implements OnInit {
-
-  users: [] = [];
   
-  newCourses: Course[] = [{name: "", studyField: "", description: ""}];
+  newCourse: Course = {name: "", studyField: "", description: ""};
 
   newUser: User = {name : "", surname : "",  email : "" , role: "", courses: [], gitHubLogin: ""}
 
@@ -41,6 +39,12 @@ export class RegisterComponent implements OnInit {
   }
 
   ngOnInit(): void { }
+
+  addNewCourse(){
+    this.ApiManagerService.insertCourse(this.newCourse)
+    .then(i => i)
+    .catch((error) => { console.log(error) });
+  }
 
   addNewUser() {
     this.ApiManagerService.insertUser(this.newUser)

@@ -103,5 +103,10 @@ export class ApiManagerService {
     .catch(error => console.log(error))
   }
 
+  public insertCourse(newCourse:Course): Promise<Course[]>{
+    return axios.post(this.urlCourses, newCourse)
+    .then(response => response.data)
+    .catch(error => console.log(error))
+  }
 
 }

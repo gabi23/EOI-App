@@ -1,5 +1,5 @@
 <body>
-    <h2>Add User</h2><br><br>
+    <h2>Add User</h2>
 
     <input type="text" 
     placeholder="Name" 
@@ -38,13 +38,25 @@
     [(ngModel)]="newUser.gitHubLogin">
     <br><br>
 
-    <button (click)="addNewUser()">Add User</button>
+    <button (click)="addNewUser()">Add User</button><br><br>
 
-    <h2>Add Course</h2><br><br>
+    <h2>Add Course</h2>
 
     <input type="text"
     placeholder="Course name" 
-    [(ngModel)]="newCourses.name">
+    [(ngModel)]="newCourse.name">
     <br><br>
+
+    <input type="text"
+    placeholder="Study field" 
+    [(ngModel)]="newCourse.studyField">
+    <br><br>
+
+    <input type="text"
+    placeholder="Description" 
+    [(ngModel)]="newCourse.description">
+    <br><br>
+
+    <button (click)="addNewCourse()">Add Course</button><br><br>
 
 </body>
