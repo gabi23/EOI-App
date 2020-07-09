@@ -117,10 +117,12 @@ export class FormComponent implements OnInit {
   }
 
   async validateEmail() {
+    let aux = await this.apiManagerServices.findEmail(this.newEmail)
+    console.log(aux)
     if (!this.emailValid.test(this.newEmail)) {
       this.errorInNewEmail = true;
       this.emailErrorMesagge = "Must be user@server";
-    } else if (await this.apiManagerServices.findEmail(this.newEmail)) {
+    } else if (aux.length > 0) {
       this.errorInNewEmail = true;
       this.emailErrorMesagge = "This email already exists";
     } else {

@@ -83,6 +83,7 @@ export class ApiManagerService {
 
   public findEmail(email:string): Promise<User[]>{
     const user = axios.get(`${this.urlUsers}?email=${email}`)
+      
       .then(response => response.data)
       .catch(error => console.log(error));
     return user;
