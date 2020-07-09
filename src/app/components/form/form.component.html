@@ -45,10 +45,11 @@
         </div>
     </div>
 
+    <div *ngIf="userUpdated==true">
+        <span>User successfully updated</span>
+    </div> 
+
     <button id="updateButton" type='submit' (click)='updateUser()'>Update</button>
-         <!-- <div *ngIf="contactSave==true">
-            <span>El contacto se ha modificado con éxito</span>
-        </div>  -->
 </form>
 
 <form *ngIf="isEdit==false">
@@ -97,11 +98,11 @@
         </div>
     </div>
 
-    <button id="addButton" type='submit' (click)='addNewUser()'>Add</button>
-         <!-- <div *ngIf="contactSave==true">
-            <span>El contacto se ha modificado con éxito</span>
-        </div>  -->
-    
+    <div *ngIf="userAdded==true">
+        <span>User successfully added</span>
+    </div> 
+
+    <button id="addButton" type='submit' (click)='addNewUser()'>Add</button>    
 </form>
 
 

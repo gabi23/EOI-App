@@ -44,6 +44,9 @@ export class FormComponent implements OnInit {
   phoneErrorMesagge: string = "";
   emailErrorMesagge: string = "";
 
+  userAdded: boolean = false;
+  userUpdated: boolean = false;
+
   constructor(private apiManagerServices: ApiManagerService, private route: ActivatedRoute, public router: Router){
     this.isEdit = this.route.snapshot.url.toString().includes('edit'); 
     this.loadUser();
@@ -154,7 +157,7 @@ export class FormComponent implements OnInit {
     this.phoneErrorMesagge = "";
   }
 
-  safewordGenerator():string {
+  safeWordGenerator():string {
     const characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789$+=?@_/#.";
     let safeword = "";
     for (let i=0; i<9; i++) safeword +=characters.charAt(Math.floor(Math.random()*characters.length));
@@ -176,7 +179,11 @@ export class FormComponent implements OnInit {
       this.user.courses = this.newCourses;
     }
     await this.apiManagerServices.updateUser(this.user.id, this.user);
-    this.router.navigate(['users']);
+    this.userUpdated = true;
+    setTimeout(() =>{
+      this.userUpdated = false;
+      this.router.navigate(['users']);
+    }, 3000);    
   }
 
   async addNewUser(){
@@ -192,10 +199,12 @@ export class FormComponent implements OnInit {
       this.user.phone = this.newPhone;
       this.user.gitHubLogin = this.newGitHubLogin;
       this.user.courses = this.newCourses;
-      this.user.safeWord = this.safewordGenerator();      
+      this.user.safeWord = this.safeWordGenerator();      
     }
     await this.apiManagerServices.insertUser(this.user)
-    this.router.navigate(['users']);
+    await this.apiManagerServices.sendMessage(this.user);
+    this.userAdded = true;
+    setTimeout(() => (this.userAdded = false), 3000);
   }
 
 }
