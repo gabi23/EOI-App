@@ -14,7 +14,7 @@ export type User = {
 };
 
 export type Course = {
-  id: number, 
+  id?: number, 
   name: string,
   studyField: string, // Posiblemente comprobar cambios más adelante
   description: string
@@ -108,5 +108,10 @@ export class ApiManagerService {
     .catch(error => console.log(error))
   }
 
+  public insertCourse(newCourse:Course): Promise<Course[]>{
+    return axios.post(this.urlCourses, newCourse)
+    .then(response => response.data)
+    .catch(error => console.log(error))
+  }
 
 }
