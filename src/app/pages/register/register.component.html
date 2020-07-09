@@ -38,7 +38,13 @@
     [(ngModel)]="newUser.gitHubLogin">
     <br><br>
 
-    <button (click)="addNewUser()">Add User</button><br><br>
+    <button (click)="addNewUser()"
+    (click)="feedBackNewUserAdded()"
+    >Add User</button><br><br>
+
+    <span
+    *ngIf="addedNewUserValidation != false"
+    >You add a new user, check it</span>
 
     <h2>Add Course</h2>
 
@@ -57,6 +63,12 @@
     [(ngModel)]="newCourse.description">
     <br><br>
 
-    <button (click)="addNewCourse()">Add Course</button><br><br>
+    <button (click)="addNewCourse()"
+    (click)="feedBackNewCourseAdded()"
+    >Add Course </button><br><br>
+    
+    <span
+    *ngIf="addedNewCourseValidation != false"
+    >You add a new course, check it</span>
 
 </body>

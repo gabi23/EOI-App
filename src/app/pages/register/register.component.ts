@@ -26,6 +26,10 @@ export class RegisterComponent implements OnInit {
 
   errorPhoneBoolean: boolean = false;
 
+  addedNewCourseValidation: boolean = false;
+
+  addedNewUserValidation: boolean = false;
+
   errorName: string = "";
 
   errorEmail: string = "";
@@ -46,10 +50,18 @@ export class RegisterComponent implements OnInit {
     .catch((error) => { console.log(error) });
   }
 
+  feedBackNewCourseAdded(){
+    return this.addedNewCourseValidation=true;
+  }
+
   addNewUser() {
     this.ApiManagerService.insertUser(this.newUser)
       .then(i => i)
       .catch((error) => { console.log(error) });
+  }
+
+  feedBackNewUserAdded(){
+    return this.addedNewUserValidation=true;
   }
 
   validationName() {
