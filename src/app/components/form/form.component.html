@@ -71,7 +71,7 @@
     <div class="inputs">
         <p>Email</p>
         <input type="email" name="newEmail" (keyup.enter)="updateUser()"
-            (focus)="emailOnFocus()"  [(ngModel)]="newEmail"
+            (focus)="emailOnFocus()" (blur)="validateEmail()" [(ngModel)]="newEmail"
             [class.error]="errorInNewEmail==true" />
         <p class="errors" *ngIf="errorInNewEmail==true">{{ emailErrorMesagge }}</p>
     </div>
