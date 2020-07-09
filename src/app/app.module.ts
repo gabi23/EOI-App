@@ -17,6 +17,7 @@ import { MatInputModule } from '@angular/material/input';
 import {MatSelectModule} from '@angular/material/select';
 import { EditComponent } from './pages/edit/edit.component';
 import {MatCardModule} from '@angular/material/card';
+import { FormComponent } from './components/form/form.component';
 
 
 @NgModule({
@@ -28,7 +29,8 @@ import {MatCardModule} from '@angular/material/card';
     UserComponent,
     RegisterComponent,
     DialogComponent,
-    EditComponent
+    EditComponent,
+    FormComponent
   ],
   imports: [
     BrowserModule,

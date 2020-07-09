@@ -6,11 +6,11 @@ export type User = {
   name: string,
   surname: string,
   email: string,
-  phone?: number,
-  role: string,
+  phone: number,
+  role?: string,
   safeWord?: string,  // A falta de generar la "pass" al registrar
-  courses?: number[],
-  gitHubLogin? : string
+  courses: number[],
+  gitHubLogin: string
 };
 
 export type Course = {
@@ -19,7 +19,6 @@ export type Course = {
   studyField: string, // Posiblemente comprobar cambios más adelante
   description: string
 };
-
 
 
 @Injectable({
@@ -31,10 +30,9 @@ export class ApiManagerService {
   
   constructor() { }
 
-  async getUser(id : number) : Promise <User> {
+  async getUser(id: number): Promise <User> {
     return await axios.get(`${this.urlUsers}/${id}`)
       .then( res => res.data)
-    
   }
 
   public getAllUsers(): Promise<User[]> {
