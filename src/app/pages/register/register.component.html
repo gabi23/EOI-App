@@ -46,6 +46,13 @@
     *ngIf="addedNewUserValidation != false"
     >You add a new user, check it</span>
 
+    <div>
+        <div *ngFor="let course of courses">
+            <input type="checkbox" [value]="course.id" [checked]=isChecked(course.id) (change)="onCheckboxChange($event)">
+            <label>{{course.name}}</label><br>
+        </div>
+    </div>
+
     <h2>Add Course</h2>
 
     <input type="text"
