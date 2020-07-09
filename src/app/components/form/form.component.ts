@@ -154,6 +154,13 @@ export class FormComponent implements OnInit {
     this.phoneErrorMesagge = "";
   }
 
+  safewordGenerator():string {
+    const characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789$+=?@_/#.";
+    let safeword = "";
+    for (let i=0; i<9; i++) safeword +=characters.charAt(Math.floor(Math.random()*characters.length));
+    return safeword;
+  }
+
   async updateUser(){
     if (
       this.errorInNewName == false &&
@@ -185,6 +192,7 @@ export class FormComponent implements OnInit {
       this.user.phone = this.newPhone;
       this.user.gitHubLogin = this.newGitHubLogin;
       this.user.courses = this.newCourses;
+      this.user.safeWord = this.safewordGenerator();      
     }
     await this.apiManagerServices.insertUser(this.user)
     this.router.navigate(['users']);
