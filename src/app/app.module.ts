@@ -16,6 +16,7 @@ import {MatButtonModule} from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import {MatSelectModule} from '@angular/material/select';
 import { EditComponent } from './pages/edit/edit.component';
+import {MatCardModule} from '@angular/material/card';
 
 
 @NgModule({
@@ -37,6 +38,7 @@ import { EditComponent } from './pages/edit/edit.component';
     MatFormFieldModule,
     MatSelectModule,
     MatButtonModule,
+    MatCardModule,
     MatInputModule,
     BrowserAnimationsModule
   ],

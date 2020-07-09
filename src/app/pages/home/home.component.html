@@ -1,2 +1,36 @@
-<p>home works!</p>
-<img src="../../../assets/eoi.jpg" alt="">
+
+<div class="home-container">
+    <div class="top">
+        <span>EOI, entre las 10 Universidades y Escuelas de Negocio iberoamericanas más innovadoras</span>
+    </div>
+
+    <div class="img-container">
+        <img src="../../../assets/eoi.jpg" alt="">
+    </div>
+    
+    <div class="cart-container">
+
+    <div *ngFor="let course of courses" > 
+
+        <mat-card class="example-card">
+            <mat-card-header>
+            <div mat-card-avatar class="example-header-image"></div>
+            <mat-card-title>{{course.name}}</mat-card-title>
+            <mat-card-subtitle>{{course.studyField}}</mat-card-subtitle>
+            </mat-card-header>
+            <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
+            <mat-card-content>
+            <p>
+                {{course.description}} 
+            </p>
+            </mat-card-content>
+        </mat-card>
+
+    </div>
+        
+          
+    </div>
+
+</div>
+
+
