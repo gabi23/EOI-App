@@ -1,22 +1,48 @@
-a {
-  text-decoration: none;
-  color: black;
 
-}
-
-
-h3{
-  margin-bottom: 4px;
-  color: blue;
-  font-weight: bolder;
-}
-h4, p {
-  margin: 0px
+h1, h2 {
+  font-weight: bold;;
 }
 
 
 .repository {
+
   margin: 70px;
-  border: 2px solid black;
+  padding: 20PX;
+  border: 2px solid #5a585838;
+  border-radius: 25px;
+
+  a {
+    text-decoration: none;
+    color: black;
+  
+  }
+  
+  
+  .repository-name{
+    margin-bottom: 4px;
+    color: blue;
+    font-weight: bolder;
+    font-size: 24px;
+  }
+
+  .repository-heading{
+    margin: 0px;
+    font-weight: bold;
+  }
+ 
+  
+
+  .languages-list{
+    list-style: none;
+    margin:  0;
+    padding: 0;
+  }
+  
+  .language{
+    display: inline-block;
+    padding: 3px;
+  }
+
 
 }
+
