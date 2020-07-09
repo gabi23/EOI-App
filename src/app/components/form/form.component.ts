@@ -147,6 +147,11 @@ export class FormComponent implements OnInit {
     this.nameErrorMesagge = "";
   }
 
+  surnameOnFocus() {
+    this.errorInNewSurname = false;
+    this.surnameErrorMesagge = "";
+  }
+
   emailOnFocus() {
     this.errorInNewEmail = false;
     this.emailErrorMesagge = "";

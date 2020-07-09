@@ -32,8 +32,8 @@
 
     <div class="inputs">
         <p>GitHub Login</p>
-        <input type="tel" name="newPhone" placeholder={{user.gitHubLogin}} (keyup.enter)="updateUser()"
-            (focus)="phoneOnFocus()" (blur)="validatePhone()" [(ngModel)]="newGitHubLogin" />
+        <input type="text" name="newGitHubLogin" placeholder={{user.gitHubLogin}} (keyup.enter)="updateUser()"
+               [(ngModel)]="newGitHubLogin" />
     </div>
 
     <div class="checkboxes">
@@ -63,7 +63,7 @@
     <div class="inputs">
         <p>Surname</p>
         <input type="text" name="newSurname" (keyup.enter)="updateUser()"
-            (focus)="nameOnFocus()" (blur)="validateSurname()" [(ngModel)]="newSurname"
+            (focus)="surnameOnFocus()" (blur)="validateSurname()" [(ngModel)]="newSurname"
             [class.error]="errorInNewSurname==true" />
         <p class="errors" *ngIf="errorInNewSurname==true">{{ surnameErrorMesagge }}</p>
     </div>
@@ -86,8 +86,7 @@
 
     <div class="inputs">
         <p>GitHub Login</p>
-        <input type="tel" name="newPhone" (keyup.enter)="updateUser()"
-            (focus)="phoneOnFocus()" (blur)="validatePhone()" [(ngModel)]="newGitHubLogin" />
+        <input type="text" name="newGitHubLogin" (keyup.enter)="updateUser()" [(ngModel)]="newGitHubLogin"/>
     </div>
 
     <div class="checkboxes">
