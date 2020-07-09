@@ -52,6 +52,8 @@ export class UserComponent implements OnInit {
     this.gitHubApiManager.getUserRepos(gitHubLogin)
       .then((repos) => {
         this.repos = repos;
+        let reposNames = repos.map(repo => repo.name)
+        this.loadRepositoriesLanguages(gitHubLogin, reposNames);
         
       }).catch((err) => {
         console.log (err);
@@ -59,6 +61,15 @@ export class UserComponent implements OnInit {
       });
   }
 
+  loadRepositoriesLanguages (gitHubLogin: string, repositoriesNames: string[]){
+    this.gitHubApiManager.getRepositoriesLanguages(gitHubLogin, repositoriesNames)
+      .then((repositoriesLanguages) => {
+        repositoriesLanguages.forEach( (repositorylanguages, index) => {
+          this.repos[index].languages = repositorylanguages 
+        }); 
+      })
+    
+  }
 
 
 }
