@@ -1,13 +1,13 @@
 <form *ngIf="isEdit==true">
     <div class="inputs">
-        <p>Name</p>
+        <p>Nombre</p>
         <input type="text" name="newName" placeholder={{user.name}} (keyup.enter)="updateUser()" (focus)="nameOnFocus()"
             (blur)="validateName()" [(ngModel)]="newName" [class.error]="errorInNewName==true" />
         <p class="errors" *ngIf="errorInNewName==true">{{ nameErrorMesagge }}</p>
     </div>
 
     <div class="inputs">
-        <p>Surname</p>
+        <p>Apellidos</p>
         <input type="text" name="newSurname" placeholder={{user.surname}} (keyup.enter)="updateUser()"
             (focus)="nameOnFocus()" (blur)="validateSurname()" [(ngModel)]="newSurname"
             [class.error]="errorInNewSurname==true" />
@@ -15,7 +15,7 @@
     </div>
 
     <div class="inputs">
-        <p>Email</p>
+        <p>Correo electrónico</p>
         <input type="email" name="newEmail" placeholder={{user.email}} (keyup.enter)="updateUser()"
             (focus)="emailOnFocus()" (blur)="validateEmail()" [(ngModel)]="newEmail"
             [class.error]="errorInNewEmail==true" />
@@ -23,7 +23,7 @@
     </div>
 
     <div class="inputs">
-        <p>Phone</p>
+        <p>Teléfono</p>
         <input type="tel" name="newPhone" placeholder={{user.phone}} (keyup.enter)="updateUser()"
             (focus)="phoneOnFocus()" (blur)="validatePhone()" [(ngModel)]="newPhone"
             [class.error]="errorInNewPhone==true" />
@@ -31,13 +31,13 @@
     </div>
 
     <div class="inputs">
-        <p>GitHub Login</p>
+        <p>Usuario de GitHub</p>
         <input type="text" name="newGitHubLogin" placeholder={{user.gitHubLogin}} (keyup.enter)="updateUser()"
                [(ngModel)]="newGitHubLogin" />
     </div>
 
     <div class="checkboxes">
-        <p>Courses</p>
+        <p>Cursos</p>
         <div *ngFor="let course of courses">
             <input type="checkbox" [value]="course.id" [checked]=isChecked(course.id)
                 (change)="onCheckboxChange($event)">
@@ -54,14 +54,14 @@
 
 <form *ngIf="isEdit==false">
     <div class="inputs">
-        <p>Name</p>
+        <p>Nombre</p>
         <input type="text" name="newName" (keyup.enter)="updateUser()" (focus)="nameOnFocus()"
             (blur)="validateName()" [(ngModel)]="newName" [class.error]="errorInNewName==true" />
         <p class="errors" *ngIf="errorInNewName==true">{{ nameErrorMesagge }}</p>
     </div>
 
     <div class="inputs">
-        <p>Surname</p>
+        <p>Apellidos</p>
         <input type="text" name="newSurname" (keyup.enter)="updateUser()"
             (focus)="surnameOnFocus()" (blur)="validateSurname()" [(ngModel)]="newSurname"
             [class.error]="errorInNewSurname==true" />
@@ -69,7 +69,7 @@
     </div>
 
     <div class="inputs">
-        <p>Email</p>
+        <p>Correo electrónico</p>
         <input type="email" name="newEmail" (keyup.enter)="updateUser()"
             (focus)="emailOnFocus()" (blur)="validateEmail()" [(ngModel)]="newEmail"
             [class.error]="errorInNewEmail==true" />
@@ -77,7 +77,7 @@
     </div>
 
     <div class="inputs">
-        <p>Phone</p>
+        <p>Teléfono</p>
         <input type="tel" name="newPhone" (keyup.enter)="updateUser()"
             (focus)="phoneOnFocus()" (blur)="validatePhone()" [(ngModel)]="newPhone"
             [class.error]="errorInNewPhone==true" />
@@ -85,12 +85,12 @@
     </div>
 
     <div class="inputs">
-        <p>GitHub Login</p>
+        <p>Usuario de GitHub</p>
         <input type="text" name="newGitHubLogin" (keyup.enter)="updateUser()" [(ngModel)]="newGitHubLogin"/>
     </div>
 
     <div class="checkboxes">
-        <p>Courses</p>
+        <p>Cursos</p>
         <div *ngFor="let course of courses">
             <input type="checkbox" [value]="course.id" (change)="onCheckboxChange($event)">
             <label>{{course.name}}</label><br>
@@ -98,7 +98,7 @@
     </div>
 
     <div *ngIf="userAdded==true">
-        <span>User successfully added</span>
+        <span>Usuario añadido correctamente</span>
     </div> 
 
     <button id="addButton" type='submit' (click)='addNewUser()'>Add</button>    
