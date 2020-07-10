@@ -1,29 +1,29 @@
 <div class="container">
     <div>
-        <h2>Register User</h2>
+        <h2>Registrar Usuario</h2>
         <app-form></app-form>
     </div>
     
     <div>
-        <h2>Register Course</h2>
+        <h2>Registrar Curso</h2>
         <form>
             <div class="inputs">
-                <p>Name</p>
+                <p>Nombre</p>
                 <input type="text" name="name" (keyup.enter)="addCourse()" [(ngModel)]="name"/>
             </div>
         
             <div class="inputs">
-                <p>Study Field</p>
+                <p>Campor de estudio</p>
                 <input type="text" name="studyField" (keyup.enter)="addCourse()" [(ngModel)]="studyField"/>
             </div>
         
             <div class="inputs">
-                <p>Description</p>
+                <p>Descripción</p>
                 <textarea type="text" name="description" (keyup.enter)="addCourse()" [(ngModel)]="description"></textarea>
             </div>
         
             <div *ngIf="courseAdded==true">
-                <span>Course successfully added</span>
+                <span>Curso añadido correctamente</span>
             </div> 
         
             <button id="addButton" type='submit' (click)='addCourse()'>Add</button>
