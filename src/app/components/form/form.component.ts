@@ -209,9 +209,15 @@ export class FormComponent implements OnInit {
       this.user.courses = this.newCourses;
       this.user.safeWord = this.safeWordGenerator();
       await this.apiManagerServices.insertUser(this.user)
-      await this.apiManagerServices.sendMessage(this.user);
+      this.apiManagerServices.sendMessage(this.user);
       this.userAdded = true;
-      setTimeout(() => (this.userAdded = false), 3000);      
+      this.newName = "";
+      this.newSurname = "";
+      this.newEmail = "";
+      this.newPhone = null;
+      this.newGitHubLogin = "";
+      this.newCourses = [];
+      setTimeout(() => (this.userAdded = false), 3000);
     }
   }
 
