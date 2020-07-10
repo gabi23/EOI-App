@@ -92,10 +92,10 @@ export class FormComponent implements OnInit {
   validateName() {
     if (this.newName.length < 2) {
       this.errorInNewName = true;
-      this.nameErrorMesagge = "Minimum 2 letters";
+      this.nameErrorMesagge = "Mínimo 2 carácteres";
     } else if (!this.nameValid.test(this.newName)) {
       this.errorInNewName = true;
-      this.nameErrorMesagge = "Can't have numbers";
+      this.nameErrorMesagge = "No se permiten números";
     } else {
       this.errorInNewName = false;
       this.nameErrorMesagge = "";
@@ -105,10 +105,10 @@ export class FormComponent implements OnInit {
   validateSurname() {
     if (this.newSurname.length < 2) {
       this.errorInNewSurname = true;
-      this.surnameErrorMesagge = "Minimum 2 letters";
+      this.surnameErrorMesagge = "Mínimo 2 carácteres";
     } else if (!this.nameValid.test(this.newSurname)) {
       this.errorInNewSurname = true;
-      this.nameErrorMesagge = "Can't have numbers";
+      this.nameErrorMesagge = "No se permiten números";
     } else {
       this.errorInNewSurname = false;
       this.surnameErrorMesagge = "";
@@ -119,10 +119,10 @@ export class FormComponent implements OnInit {
     let aux = await this.apiManagerServices.findEmail(this.newEmail);
     if (!this.emailValid.test(this.newEmail)) {
       this.errorInNewEmail = true;
-      this.emailErrorMesagge = "Must be user@server";
+      this.emailErrorMesagge = "Debe tener la estructura: usuario@servidor";
     } else if (aux.length > 0) {
       this.errorInNewEmail = true;
-      this.emailErrorMesagge = "This email already exists";
+      this.emailErrorMesagge = "El email ya se encuentra en uso";
     } else {
       this.errorInNewEmail = false;
       this.emailErrorMesagge = "";
@@ -132,10 +132,10 @@ export class FormComponent implements OnInit {
   validatePhone() {
     if (this.newPhone.toString().length < 9) {
       this.errorInNewPhone = true;
-      this.phoneErrorMesagge = "Minimum 9 numbers";
+      this.phoneErrorMesagge = "Mínimo 9 números";
     }else if(!this.phoneValid.test(this.newPhone.toString())){
       this.errorInNewPhone = true;
-      this.phoneErrorMesagge = "Must be numbers";
+      this.phoneErrorMesagge = "Deben ser números";
     }else {
       this.errorInNewPhone = false;
       this.phoneErrorMesagge = "";
