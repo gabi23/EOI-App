@@ -92,7 +92,7 @@ export class FormComponent implements OnInit {
   validateName() {
     if (this.newName.length < 2) {
       this.errorInNewName = true;
-      this.nameErrorMesagge = "Mínimo 2 carácteres";
+      this.nameErrorMesagge = "Mínimo 2 caracteres";
     } else if (!this.nameValid.test(this.newName)) {
       this.errorInNewName = true;
       this.nameErrorMesagge = "No se permiten números";
@@ -105,7 +105,7 @@ export class FormComponent implements OnInit {
   validateSurname() {
     if (this.newSurname.length < 2) {
       this.errorInNewSurname = true;
-      this.surnameErrorMesagge = "Mínimo 2 carácteres";
+      this.surnameErrorMesagge = "Mínimo 2 caracteres";
     } else if (!this.nameValid.test(this.newSurname)) {
       this.errorInNewSurname = true;
       this.nameErrorMesagge = "No se permiten números";
