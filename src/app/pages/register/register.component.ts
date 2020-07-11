@@ -18,17 +18,30 @@ export class RegisterComponent implements OnInit {
   studyField: string;
   description: string;
 
+  selectedImage = null;
+
   courseAdded: boolean = false;
 
   constructor(private apiManagerServices: ApiManagerService) { }
 
   ngOnInit(): void {}
 
+  onImageSelected(event) {
+    let file: File = <File> event.target.files[0];
+    let myReader: FileReader = new FileReader();
+
+    myReader.onloadend = (e) => {
+      this.selectedImage = myReader.result;
+    }
+    myReader.readAsDataURL(file);
+  }
+
   addCourse() {
     this.newCourse.name = this.name;
     this.newCourse.studyField = this.studyField;
     this.newCourse.description = this.description;
     this.apiManagerServices.insertCourse(this.newCourse);
+    this.newCourse.image = this.selectedImage;
     this.courseAdded = true;
     setTimeout(() => (this.courseAdded = false), 3000);
   }

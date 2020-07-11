@@ -8,16 +8,18 @@ export type User = {
   email: string,
   phone: number,
   role?: string,
-  safeWord?: string,  // A falta de generar la "pass" al registrar
+  safeWord?: string,
   courses: number[],
-  gitHubLogin: string
+  gitHubLogin: string,
+  image?
 };
 
 export type Course = {
   id?: number, 
   name: string,
-  studyField: string, // Posiblemente comprobar cambios más adelante
-  description: string
+  studyField: string,
+  description: string,
+  image?
 };
 
 

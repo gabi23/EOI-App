@@ -21,6 +21,10 @@
                 <p>Descripción</p>
                 <textarea type="text" name="description" (keyup.enter)="addCourse()" [(ngModel)]="description"></textarea>
             </div>
+            
+            <div>
+                <input type="file" accept="image/*" (change)="onImageSelected($event)"/>
+            </div>            
         
             <div *ngIf="courseAdded==true">
                 <span>Curso añadido correctamente</span>

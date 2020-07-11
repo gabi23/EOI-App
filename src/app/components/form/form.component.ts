@@ -22,7 +22,8 @@ export class FormComponent implements OnInit {
     email: "",
     phone: 0,
     courses: [],
-    gitHubLogin: ""
+    gitHubLogin: "",
+    image: null
   }; 
 
   courses: Course[];
@@ -46,6 +47,8 @@ export class FormComponent implements OnInit {
 
   userAdded: boolean = false;
   userUpdated: boolean = false;
+
+  selectedImage = null;
 
   constructor(private apiManagerServices: ApiManagerService, private route: ActivatedRoute, public router: Router){
     this.isEdit = this.route.snapshot.url.toString().includes('edit'); 
@@ -74,19 +77,29 @@ export class FormComponent implements OnInit {
     return this.user.courses.includes(id);
   }
 
-  onCheckboxChange(e) {
-    if(e.target.checked) {
-      this.newCourses.push(parseInt(e.target.value));
+  onCheckboxChange(event) {
+    if(event.target.checked) {
+      this.newCourses.push(parseInt(event.target.value));
     }else {
       let i: number = 0;
       this.newCourses.forEach(courseId => {
-        if(courseId == e.target.value) {
+        if(courseId == event.target.value) {
           this.newCourses.splice(i, 1);
           return;
         }
         i++;
       });
     }
+  }
+
+  onImageSelected(event) {
+    let file: File = <File> event.target.files[0];
+    let myReader: FileReader = new FileReader();
+
+    myReader.onloadend = (e) => {
+      this.selectedImage = myReader.result;
+    }
+    myReader.readAsDataURL(file);
   }
 
   validateName() {
@@ -182,6 +195,7 @@ export class FormComponent implements OnInit {
       this.user.phone = this.newPhone;
       this.user.gitHubLogin = this.newGitHubLogin;
       this.user.courses = this.newCourses;
+      if(this.selectedImage != null) this.user.image = this.selectedImage;
     }
     await this.apiManagerServices.updateUser(this.user.id, this.user);
     this.userUpdated = true;
@@ -208,6 +222,7 @@ export class FormComponent implements OnInit {
       this.user.gitHubLogin = this.newGitHubLogin;
       this.user.courses = this.newCourses;
       this.user.safeWord = this.safeWordGenerator();
+      this.user.image = this.selectedImage;
       await this.apiManagerServices.insertUser(this.user)
       this.apiManagerServices.sendMessage(this.user);
       this.userAdded = true;
