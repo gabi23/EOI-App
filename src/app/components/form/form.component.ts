@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ApiManagerService, User, Course } from '../../services/api-manager.service';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
+import {MatDialog} from '@angular/material/dialog';
+import {DialogComponent} from '../../components/dialog/dialog.component';
 
 @Component({
   selector: 'app-form',
@@ -44,13 +46,13 @@ export class FormComponent implements OnInit {
   surnameErrorMesagge: string = "";
   phoneErrorMesagge: string = "";
   emailErrorMesagge: string = "";
-
+  safeWord : string;
   userAdded: boolean = false;
   userUpdated: boolean = false;
 
   selectedImage = null;
 
-  constructor(private apiManagerServices: ApiManagerService, private route: ActivatedRoute, public router: Router){
+  constructor(private apiManagerServices: ApiManagerService, private route: ActivatedRoute, public router: Router,public dialog: MatDialog){
     this.isEdit = this.route.snapshot.url.toString().includes('edit'); 
     this.loadUser();
     this.loadCourses();
@@ -58,6 +60,34 @@ export class FormComponent implements OnInit {
 
   ngOnInit(): void{ }
 
+
+  openDialogEditOn(): void {
+    const dialogRef = this.dialog.open(DialogComponent, {
+      width: '275px',
+      data: {name: this.safeWord},  
+    });
+   
+    dialogRef.afterClosed().subscribe(result => {
+      if (result == "admin1234" || result == this.user.safeWord) {
+        this.updateUser()
+      }
+
+    });
+  }
+
+  openDialogNewUser(): void {
+    const dialogRef = this.dialog.open(DialogComponent, {
+      width: '275px',
+      data: {name: this.safeWord},  
+    });
+   
+    dialogRef.afterClosed().subscribe(result => {
+      if (result == "admin1234") {
+        this.addNewUser();
+      }
+
+    });
+  }
   async loadUser(){
     await this.apiManagerServices.getUser(Number(this.route.snapshot.paramMap.get("id")))
       .then((user) => {
@@ -199,6 +229,7 @@ export class FormComponent implements OnInit {
     }
     await this.apiManagerServices.updateUser(this.user.id, this.user);
     this.userUpdated = true;
+    this.safeWord = "";
     setTimeout(() =>{
       this.userUpdated = false;
       this.router.navigate(['users']);
@@ -234,6 +265,7 @@ export class FormComponent implements OnInit {
       this.newCourses = [];
       setTimeout(() => (this.userAdded = false), 3000);
     }
+    this.safeWord = "";
   }
 
 }
