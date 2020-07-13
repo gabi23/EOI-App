@@ -21,12 +21,17 @@
                 <p>Descripción</p>
                 <textarea type="text" name="description" (keyup.enter)="addCourse()" [(ngModel)]="description"></textarea>
             </div>
+            
+            <div class="inputs">
+                <p>Elige una foto representativa del curso:</p>
+                <input type="file" accept="image/*" (change)="onImageSelected($event)"/>
+            </div>           
         
             <div *ngIf="courseAdded==true">
                 <span>Curso añadido correctamente</span>
             </div> 
         
-            <button id="addButton" type='submit' (click)='addCourse()'>Añadir</button>
+            <button id="addButton" type='submit' (click)='openDialogCourse()'>Añadir</button>
         </form>
     </div>
 </div>

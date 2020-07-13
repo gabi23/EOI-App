@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ApiManagerService, User, Course } from '../../services/api-manager.service';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
+import {MatDialog} from '@angular/material/dialog';
+import {DialogComponent} from '../../components/dialog/dialog.component';
 
 @Component({
   selector: 'app-form',
@@ -22,7 +24,8 @@ export class FormComponent implements OnInit {
     email: "",
     phone: 0,
     courses: [],
-    gitHubLogin: ""
+    gitHubLogin: "",
+    image: null
   }; 
 
   courses: Course[];
@@ -43,11 +46,13 @@ export class FormComponent implements OnInit {
   surnameErrorMesagge: string = "";
   phoneErrorMesagge: string = "";
   emailErrorMesagge: string = "";
-
+  safeWord : string;
   userAdded: boolean = false;
   userUpdated: boolean = false;
 
-  constructor(private apiManagerServices: ApiManagerService, private route: ActivatedRoute, public router: Router){
+  selectedImage = null;
+
+  constructor(private apiManagerServices: ApiManagerService, private route: ActivatedRoute, public router: Router,public dialog: MatDialog){
     this.isEdit = this.route.snapshot.url.toString().includes('edit'); 
     this.loadUser();
     this.loadCourses();
@@ -55,6 +60,34 @@ export class FormComponent implements OnInit {
 
   ngOnInit(): void{ }
 
+
+  openDialogEditOn(): void {
+    const dialogRef = this.dialog.open(DialogComponent, {
+      width: '275px',
+      data: {name: this.safeWord},  
+    });
+   
+    dialogRef.afterClosed().subscribe(result => {
+      if (result == "admin1234" || result == this.user.safeWord) {
+        this.updateUser()
+      }
+
+    });
+  }
+
+  openDialogNewUser(): void {
+    const dialogRef = this.dialog.open(DialogComponent, {
+      width: '275px',
+      data: {name: this.safeWord},  
+    });
+   
+    dialogRef.afterClosed().subscribe(result => {
+      if (result == "admin1234") {
+        this.addNewUser();
+      }
+
+    });
+  }
   async loadUser(){
     await this.apiManagerServices.getUser(Number(this.route.snapshot.paramMap.get("id")))
       .then((user) => {
@@ -74,19 +107,29 @@ export class FormComponent implements OnInit {
     return this.user.courses.includes(id);
   }
 
-  onCheckboxChange(e) {
-    if(e.target.checked) {
-      this.newCourses.push(parseInt(e.target.value));
+  onCheckboxChange(event) {
+    if(event.target.checked) {
+      this.newCourses.push(parseInt(event.target.value));
     }else {
       let i: number = 0;
       this.newCourses.forEach(courseId => {
-        if(courseId == e.target.value) {
+        if(courseId == event.target.value) {
           this.newCourses.splice(i, 1);
           return;
         }
         i++;
       });
     }
+  }
+
+  onImageSelected(event) {
+    let file: File = <File> event.target.files[0];
+    let myReader: FileReader = new FileReader();
+
+    myReader.onloadend = (e) => {
+      this.selectedImage = myReader.result;
+    }
+    myReader.readAsDataURL(file);
   }
 
   validateName() {
@@ -182,9 +225,11 @@ export class FormComponent implements OnInit {
       this.user.phone = this.newPhone;
       this.user.gitHubLogin = this.newGitHubLogin;
       this.user.courses = this.newCourses;
+      if(this.selectedImage != null) this.user.image = this.selectedImage;
     }
     await this.apiManagerServices.updateUser(this.user.id, this.user);
     this.userUpdated = true;
+    this.safeWord = "";
     setTimeout(() =>{
       this.userUpdated = false;
       this.router.navigate(['users']);
@@ -208,6 +253,7 @@ export class FormComponent implements OnInit {
       this.user.gitHubLogin = this.newGitHubLogin;
       this.user.courses = this.newCourses;
       this.user.safeWord = this.safeWordGenerator();
+      this.user.image = this.selectedImage;
       await this.apiManagerServices.insertUser(this.user)
       this.apiManagerServices.sendMessage(this.user);
       this.userAdded = true;
@@ -219,6 +265,7 @@ export class FormComponent implements OnInit {
       this.newCourses = [];
       setTimeout(() => (this.userAdded = false), 3000);
     }
+    this.safeWord = "";
   }
 
 }
