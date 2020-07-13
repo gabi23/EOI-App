@@ -36,12 +36,32 @@ h1, h2 {
     list-style: none;
     margin:  0;
     padding: 0;
+    
   }
   
   .language{
+    box-sizing: border-box;
     display: inline-block;
-    padding: 3px;
+    vertical-align: bottom;
+    height: 64px;
+    min-width: 64px;
+    width: fit-content;
+    margin-right: 8px;
   }
+  .language-text{
+    border: 3px black solid;
+    height: 64px;
+    min-width: 64px;
+    width: fit-content;
+    line-height: 64px;
+    text-align: center;
+    box-sizing: border-box;
+    font-size: 24px;
+  }
+
+  
+
+ 
 
 
 }

@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ApiManagerService, User, Course } from '../../services/api-manager.service';
 import { GitHubApiService } from '../../services/git-hub-api.service'
 import { ActivatedRoute, Params } from '@angular/router';
+import { ViewEncapsulation } from '@angular/core';
+
 
 
 
@@ -10,7 +12,9 @@ import { ActivatedRoute, Params } from '@angular/router';
 @Component({
   selector: 'user',
   templateUrl: './user.component.html',
-  styleUrls: ['./user.component.scss']
+  styleUrls: ['./user.component.scss'],
+  encapsulation: ViewEncapsulation.None
+
 })
 export class UserComponent implements OnInit {
   user : User; 
@@ -69,6 +73,16 @@ export class UserComponent implements OnInit {
         }); 
       })
     
+  }
+
+  languageImageError(event){
+    let imgElement = event.target
+    let substituteElement = document.createElement("div")
+    substituteElement.appendChild(document.createTextNode( imgElement.getAttribute('alt')))
+    substituteElement.classList.add("language-text")
+    imgElement.parentNode.insertBefore( substituteElement, imgElement );
+    imgElement.parentNode.removeChild( imgElement);
+
   }
 
 
