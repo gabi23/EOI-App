@@ -41,7 +41,7 @@ yarn-error.log
 testem.log
 /typings
 db.json
-
+/email
 # System Files
 .DS_Store
 Thumbs.db
