@@ -4,7 +4,7 @@
         <mat-form-field appearance="fill">
             <mat-label>Select an option</mat-label>
             <mat-select [(value)]="courseSelected" (selectionChange)="courseFilter()">
-              <mat-option value="All courses">All courses</mat-option>
+              <mat-option value="All courses">Todos los cursos</mat-option>
               <mat-option *ngFor="let course of courses" value="{{course.name}}">{{course.name}}</mat-option>
             </mat-select>
           </mat-form-field>
