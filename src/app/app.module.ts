@@ -10,14 +10,17 @@ import { UserComponent } from './pages/user/user.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatDialogModule} from '@angular/material/dialog';
+import {MatToolbarModule} from '@angular/material/toolbar';
 import { DialogComponent } from './components/dialog/dialog.component';
-import {MatFormFieldModule} from '@angular/material/form-field'
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import {MatSelectModule} from '@angular/material/select';
 import { EditComponent } from './pages/edit/edit.component';
 import {MatCardModule} from '@angular/material/card';
 import { FormComponent } from './components/form/form.component';
+import {MatMenuModule} from '@angular/material/menu';
 
 
 @NgModule({
@@ -40,9 +43,12 @@ import { FormComponent } from './components/form/form.component';
     MatFormFieldModule,
     MatSelectModule,
     MatButtonModule,
+    MatToolbarModule,
     MatCardModule,
     MatInputModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatIconModule,
+    MatMenuModule
   ],
   entryComponents: [
     DialogComponent
