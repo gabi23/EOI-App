@@ -18,6 +18,7 @@ import {MatSelectModule} from '@angular/material/select';
 import { EditComponent } from './pages/edit/edit.component';
 import {MatCardModule} from '@angular/material/card';
 import { FormComponent } from './components/form/form.component';
+import { LoginComponent } from './login/login.component';
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import { FormComponent } from './components/form/form.component';
     RegisterComponent,
     DialogComponent,
     EditComponent,
-    FormComponent
+    FormComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
