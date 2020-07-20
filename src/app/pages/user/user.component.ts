@@ -74,15 +74,7 @@ export class UserComponent implements OnInit {
     
   }
 
-  languageImageError(event){
-    let imgElement = event.target
-    let substituteElement = document.createElement("div")
-    substituteElement.appendChild(document.createTextNode( imgElement.getAttribute('alt')))
-    substituteElement.classList.add("language-text")
-    imgElement.parentNode.insertBefore( substituteElement, imgElement );
-    imgElement.parentNode.removeChild( imgElement);
-
-  }
+ 
 
 
 }

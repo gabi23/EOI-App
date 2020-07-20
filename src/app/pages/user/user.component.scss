@@ -57,7 +57,7 @@ h1{
   }
 }
 
-@media screen and (max-width: 575px) {
+@media screen and (max-width: 700px) {
   .mat-card{
     width: auto;
   }
@@ -115,7 +115,7 @@ h1{
     margin-right: 8px;
   }
   .language-text{
-    border: 3px black solid;
+    border: 4px black solid;
     height: 64px;
     min-width: 64px;
     width: fit-content;
@@ -125,6 +125,7 @@ h1{
     font-size: 24px;
     padding: 4px;
     font-weight: bold;
+    margin-top: 16px;
   }
 
   

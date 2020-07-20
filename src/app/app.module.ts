@@ -23,6 +23,7 @@ import { FormComponent } from './components/form/form.component';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatChipsModule} from '@angular/material/chips';
 import {MatListModule} from '@angular/material/list';
+import { ProgrammingLanguageDirective } from './programming-language.directive';
 
 
 @NgModule({
@@ -35,7 +36,8 @@ import {MatListModule} from '@angular/material/list';
     RegisterComponent,
     DialogComponent,
     EditComponent,
-    FormComponent
+    FormComponent,
+    ProgrammingLanguageDirective
   ],
   imports: [
     BrowserModule,
