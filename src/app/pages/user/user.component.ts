@@ -13,7 +13,6 @@ import { ViewEncapsulation } from '@angular/core';
   selector: 'user',
   templateUrl: './user.component.html',
   styleUrls: ['./user.component.scss'],
-  encapsulation: ViewEncapsulation.None
 
 })
 export class UserComponent implements OnInit {

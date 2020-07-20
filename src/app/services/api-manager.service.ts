@@ -11,7 +11,8 @@ export type User = {
   safeWord?: string,
   courses: number[],
   gitHubLogin: string,
-  image?
+  image?,
+  web?
 };
 
 export type Course = {

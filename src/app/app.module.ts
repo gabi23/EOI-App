@@ -21,6 +21,8 @@ import { EditComponent } from './pages/edit/edit.component';
 import {MatCardModule} from '@angular/material/card';
 import { FormComponent } from './components/form/form.component';
 import {MatMenuModule} from '@angular/material/menu';
+import {MatChipsModule} from '@angular/material/chips';
+import {MatListModule} from '@angular/material/list';
 
 
 @NgModule({
@@ -48,7 +50,10 @@ import {MatMenuModule} from '@angular/material/menu';
     MatInputModule,
     BrowserAnimationsModule,
     MatIconModule,
-    MatMenuModule
+    MatMenuModule,
+    MatChipsModule,
+    MatListModule
+    
   ],
   entryComponents: [
     DialogComponent
