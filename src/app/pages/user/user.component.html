@@ -2,7 +2,7 @@
  
   
   <mat-card-content>
-    <img mat-card-avatar src="{{user.image}}" alt="imagen de perfil">
+    <img mat-card-avatar appAvatarFallback src="{{user.image}}" alt="imagen de perfil">
     <div class="profile-info">
       <mat-card-title>{{user?.name}}  {{user?.surname}}</mat-card-title>
       <div class="profile-info-field">

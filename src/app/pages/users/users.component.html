@@ -24,7 +24,7 @@
 
     <mat-card class="user-card"  *ngFor="let user of users; index as i">
         <mat-card-header>
-          <img mat-card-avatar src="{{user.image}}" alt="Foto del usuario" >
+          <img mat-card-avatar appAvatarFallback src="{{user.image}}" alt="Foto del usuario" >
           <mat-card-title>{{user.name}} {{user.surname}}</mat-card-title>
           <mat-card-subtitle>{{user.email}}</mat-card-subtitle>
         </mat-card-header>

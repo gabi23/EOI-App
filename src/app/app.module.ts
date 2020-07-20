@@ -24,6 +24,7 @@ import {MatMenuModule} from '@angular/material/menu';
 import {MatChipsModule} from '@angular/material/chips';
 import {MatListModule} from '@angular/material/list';
 import { ProgrammingLanguageDirective } from './programming-language.directive';
+import { AvatarFallbackDirective } from './avatar-fallback.directive';
 
 
 @NgModule({
@@ -37,7 +38,8 @@ import { ProgrammingLanguageDirective } from './programming-language.directive';
     DialogComponent,
     EditComponent,
     FormComponent,
-    ProgrammingLanguageDirective
+    ProgrammingLanguageDirective,
+    AvatarFallbackDirective
   ],
   imports: [
     BrowserModule,
