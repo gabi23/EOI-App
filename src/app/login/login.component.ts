@@ -9,15 +9,16 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private router:Router) { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
   }
 
-  login(form: NgForm){
-    if(form.value.email === 'admin@admin.com' && form.value.password === 'admin1234'){
+  login(form: NgForm) {
+    console.log(form.value);
+    if (form.value.email === 'admin@admin.com' && form.value.password === 'admin1234') {
       localStorage.setItem('email', form.value.email);
-      this.router.navigate(['/users']); 
+      this.router.navigate(['']);
     }
-    }
+  }
 }
