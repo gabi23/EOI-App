@@ -34,7 +34,7 @@
 }
 
 
-.cart-container{
+.courses-container{
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -44,14 +44,15 @@
     
 }
 
-.example-card {
+.course-card {
     max-width: 250px;
     border: 1px solid rgba(0, 0, 0, 0.12); 
     margin: 20px;
-    
+    height: 496px;
+
   }
-  
-.example-header-image {
-    background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
-    background-size: cover;
-}
+  .mat-card-image{
+      width: 282px;
+      height: 282px;
+  }  
+

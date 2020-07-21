@@ -1,16 +1,81 @@
-
-h1, h2 {
-  font-weight: bold;;
+h1{
+  text-align: center;
+  font-size: 32px;
+  font-weight: 500;
+  color: #3f51b5;
 }
+.mat-card{
+  width: 80%;
+  margin: 40px auto;
+}
+
+
+.mat-card-content{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+
+  
+}
+
+.mat-card-title{
+  font-size: 32px;
+  color: #3f51b5;
+}
+
+.mat-card-avatar{
+  order: 1;
+  height: 200px;
+  width: 200px;
+}
+.profile-info{
+  order: 2;
+  margin-left: 64px;
+
+
+  .profile-info-field{
+    display: flex;
+    align-items: center;
+    font-size: 24px;
+
+  }
+
+}
+
+
+.courses{
+  font-size: 32px;
+  margin-top: 32px;
+  order: 3;
+  width: 100%;
+ 
+
+  mat-chip {
+    max-width: 100%;
+   
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .mat-card{
+    width: auto;
+  }
+  .mat-card-content {
+    flex-direction: column;
+  }
+  .profile-info{
+    margin-left: 0px;
+    margin-top: 32px;
+  }
+}
+
+
 
 
 
 .repository {
 
-  margin: 70px;
-  padding: 20PX;
-  border: 2px solid #5a585838;
-  border-radius: 25px;
 
   a {
     text-decoration: none;
@@ -21,7 +86,7 @@ h1, h2 {
   
   .repository-name{
     margin-bottom: 4px;
-    color: blue;
+    color: #3f51b5;
     font-weight: bolder;
     font-size: 24px;
   }
@@ -35,30 +100,36 @@ h1, h2 {
 
   .languages-list{
     list-style: none;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
     margin:  0;
     padding: 0;
     
   }
   
   .language{
-    box-sizing: border-box;
-    display: inline-block;
-    vertical-align: bottom;
-    height: 64px;
-    min-width: 64px;
-    width: fit-content;
+    margin-top: 16px;
     margin-right: 8px;
+    img{
+      width: 64px;
+      height: 64px;
+      object-fit: cover;
+    
+    }
   }
   .language-text{
-    border: 3px black solid;
+    border: 4px black solid;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     height: 64px;
     min-width: 64px;
-    width: fit-content;
-    line-height: 64px;
-    text-align: center;
     box-sizing: border-box;
     font-size: 24px;
-    padding: 4px;
+    padding-left: 4px;
+    padding-right: 4px;
+  
     font-weight: bold;
   }
 
@@ -68,4 +139,3 @@ h1, h2 {
 
 
 }
-

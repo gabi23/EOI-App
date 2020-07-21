@@ -1,24 +1,20 @@
-<div class="nav-container">
+<mat-toolbar color="primary">
+      <img class="logo" src="../../../assets/EOI-APP-LOGO.jpg" alt="eoi logo">
+      <span class="spacer"></span>
+      <button mat-icon-button  [matMenuTriggerFor]="menu">
+        <mat-icon>menu</mat-icon>
+      </button>
+</mat-toolbar>
 
-    <div class="top">
-        <span>EOI-APP</span>
 
-    </div>
-
-
-    <div class="component-buttons">
-        <h1 class="enlaces-title">Enlaces</h1>
-
-        <div class="changePage" routerLink="">
-            <img src="../../../assets/home-black-24dp.svg" alt="">
-            <span>Inicio</span>
-        </div>
-        
-        <div class="changePage" routerLink="/users">
-            <img src="../../../assets/person-black-24dp.svg" alt="">
-            <span>Usuarios</span>
-        </div>
-    </div>
-    
-</div>
+<mat-menu #menu="matMenu">
+    <button mat-menu-item  routerLink="">
+        <mat-icon>home</mat-icon>
+        <span>Inicio</span>
+      </button>
+      <button mat-menu-item  routerLink="/users">
+        <mat-icon>group</mat-icon>
+        <span>Alumnos</span>
+      </button>
+</mat-menu>
 

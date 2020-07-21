@@ -1,15 +1,39 @@
-<h1>{{user?.name}}  {{user?.surname}}</h1>
-<div><img src="{{user.image}}" alt="Foto del usuario" width="300" height="300"></div>
-<p>{{user?.email}}</p>
-<p>{{user?.phone}}</p>
-<h2>Cursos:</h2>
-<ul *ngFor="let course of courses" >
-  <li>{{course.name}}</li>
-</ul>
-<h2>Repositorios:</h2>
-<section id="repositories"> 
+<mat-card>
+ 
   
-  <article class="repository"  *ngFor="let repo of repos">
+  <mat-card-content>
+    <img mat-card-avatar appAvatarFallback src="{{user.image}}" alt="imagen de perfil">
+    <div class="profile-info">
+      <mat-card-title>{{user?.name}}  {{user?.surname}}</mat-card-title>
+      <div class="profile-info-field">
+        <mat-icon>phone</mat-icon>
+        <span>{{user?.phone}}</span>
+      </div>
+      <div class="profile-info-field">
+        <mat-icon>email</mat-icon>
+        <span>{{user?.email}}</span>
+      </div>
+      <div class="profile-info-field">
+        <mat-icon>web</mat-icon>
+        <span>{{user?.web}}</span>
+      </div>
+    </div>
+   
+    <div class="courses">
+      <mat-card-title>Cursos</mat-card-title>
+      <mat-chip-list class="mat-chip-list-stacked">
+        <mat-chip color="primary" selected *ngFor="let course of courses" >
+          {{course.name}}
+        </mat-chip>
+      </mat-chip-list>
+
+    </div>
+  </mat-card-content>
+</mat-card>
+
+
+  <h1>Repositorios GitHub</h1>
+  <mat-card class="repository" *ngFor="let repo of repos">
     <a href={{repo.html_url}}>
         <h3 class="repository-name">{{repo.name}}</h3>
         <h4 class="repository-heading">Descripción:</h4>
@@ -17,12 +41,11 @@
         <h4 class="repository-heading">Lenguajes:</h4>
         <ul class="languages-list" >
           <li class="language" *ngFor="let language of repo.languages"> 
-            <img  src="../../../assets/languages/{{language}}.png" alt="{{language}}" (error)="languageImageError($event)"> 
+            <img ProgrammingLanguage src="../../../assets/languages/{{language}}.png" alt="{{language}}" > 
            </li>
         </ul>
       
     </a> 
-  </article>
+  </mat-card>
   
-</section> 
 

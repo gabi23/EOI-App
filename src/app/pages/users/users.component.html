@@ -1,48 +1,45 @@
 <div class="header">
-    <div class="search"> 
-        <input type="text" name="userToSearch" placeholder="Busca los alumnos..." [(ngModel)]="userToSearch" (input)="searchUser()"/>
-        <mat-form-field appearance="fill">
-            <mat-label>Select an option</mat-label>
-            <mat-select [(value)]="courseSelected" (selectionChange)="courseFilter()">
-              <mat-option value="All courses">Todos los cursos</mat-option>
-              <mat-option *ngFor="let course of courses" value="{{course.name}}">{{course.name}}</mat-option>
-            </mat-select>
-          </mat-form-field>
-    </div>
+  
+    <mat-form-field class="search"  appearance="outline">
+        <mat-label>Buscar</mat-label>
+        <input matInput  name="userToSearch" [(ngModel)]="userToSearch" (input)="searchUser()">
+        <mat-icon matPrefix>search</mat-icon>
+    </mat-form-field>
+
+    <mat-form-field class="filter" appearance="fill">
+        <mat-label>Select an option</mat-label>
+        <mat-select [(value)]="courseSelected" (selectionChange)="courseFilter()">
+          <mat-option value="All courses">Todos los cursos</mat-option>
+          <mat-option *ngFor="let course of courses" value="{{course.name}}">{{course.name}}</mat-option>
+        </mat-select>
+    </mat-form-field>
+
 </div>
 
 
 
-<!--  <p>Courses:</p>
-    <ul>
-        <li *ngFor="let nameOfCourse of nameOfCourses[i]">{{nameOfCourse}}</li>
-    </ul>
-</div> -->
 
-<div class="users">
-    <div 
-    *ngFor="let user of users; index as i" 
-    class="user-users">
-
-        <div  class="user-header">
-            <div class="user-header-picture centered">
-                <!-- <div class="circulo"></div> -->
-                <img class="image" src="{{user.image}}" alt="Foto del usuario">           
-            </div>
-
-            <div class="user-header-text">
-                <span id="bold"> {{user.name}} {{user.surname}} </span>
-                <span> {{user.email}}  </span>
-                <span> {{user.phone}} </span>
-            </div>
-        </div>
-
-        <div class="users-footer">
-            <button (click)="openDialogEdit(user)" id="editIcon" ></button>  <!-- Por ahora simplemente se hace un router link a usuario -->
-            <button routerLink="{{user.id}}" id="checkIcon"> </button>  
-           <button  (click)="openDialogDelete(user)" id="deleteIcon" > </button> 
-        </div>
-
-    </div>
+<div class="users-container" >
    
+
+    <mat-card class="user-card"  *ngFor="let user of users; index as i">
+        <mat-card-header>
+          <img mat-card-avatar appAvatarFallback src="{{user.image}}" alt="Foto del usuario" >
+          <mat-card-title>{{user.name}} {{user.surname}}</mat-card-title>
+          <mat-card-subtitle>{{user.email}}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-actions>
+          <button  mat-mini-fab  color="primary" routerLink="{{user.id}}">
+              <mat-icon>visibility</mat-icon>
+          </button>
+          <button  mat-mini-fab color="primary" (click)="openDialogEdit(user)" >
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button  mat-mini-fab color="primary"  (click)="openDialogDelete(user)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </mat-card-actions>
+      </mat-card>
+
+
 </div>
