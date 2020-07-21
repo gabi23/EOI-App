@@ -26,6 +26,7 @@ import {MatChipsModule} from '@angular/material/chips';
 import {MatListModule} from '@angular/material/list';
 import { ProgrammingLanguageDirective } from './programming-language.directive';
 import { AvatarFallbackDirective } from './avatar-fallback.directive';
+import { LoginGuard } from './login.guard';
 
 
 @NgModule({
@@ -64,7 +65,7 @@ import { AvatarFallbackDirective } from './avatar-fallback.directive';
   entryComponents: [
     DialogComponent
   ],
-  providers: [],
+  providers: [LoginGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
