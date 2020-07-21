@@ -100,32 +100,37 @@ h1{
 
   .languages-list{
     list-style: none;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
     margin:  0;
     padding: 0;
     
   }
   
   .language{
-    box-sizing: border-box;
-    display: inline-block;
-    vertical-align: bottom;
-    height: 64px;
-    min-width: 64px;
-    width: fit-content;
+    margin-top: 16px;
     margin-right: 8px;
+    img{
+      width: 64px;
+      height: 64px;
+      object-fit: cover;
+    
+    }
   }
   .language-text{
     border: 4px black solid;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     height: 64px;
     min-width: 64px;
-    width: fit-content;
-    line-height: 64px;
-    text-align: center;
     box-sizing: border-box;
     font-size: 24px;
-    padding: 4px;
+    padding-left: 4px;
+    padding-right: 4px;
+  
     font-weight: bold;
-    margin-top: 16px;
   }
 
   
@@ -134,4 +139,3 @@ h1{
 
 
 }
-
