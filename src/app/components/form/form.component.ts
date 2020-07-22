@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
 import {MatDialog} from '@angular/material/dialog';
 import {DialogComponent} from '../../components/dialog/dialog.component';
+import { FirebaseStorageService } from '../../services/firebase-storage.service';
 
 @Component({
   selector: 'app-form',
@@ -25,7 +26,7 @@ export class FormComponent implements OnInit {
     phone: 0,
     courses: [],
     gitHubLogin: "",
-    image: null
+    image: ""
   }; 
 
   courses: Course[];
@@ -50,9 +51,11 @@ export class FormComponent implements OnInit {
   userAdded: boolean = false;
   userUpdated: boolean = false;
 
-  selectedImage = null;
+  selectedImage: File = null;
+  nameSelectedImage: string = "";
+  publicURLImage: string = "";
 
-  constructor(private apiManagerServices: ApiManagerService, private route: ActivatedRoute, public router: Router,public dialog: MatDialog){
+  constructor(private apiManagerServices: ApiManagerService, private route: ActivatedRoute, private firebaseStorage: FirebaseStorageService, public router: Router, public dialog: MatDialog){
     this.isEdit = this.route.snapshot.url.toString().includes('edit'); 
     this.loadUser();
     this.loadCourses();
@@ -88,6 +91,7 @@ export class FormComponent implements OnInit {
 
     });
   }
+
   async loadUser(){
     await this.apiManagerServices.getUser(Number(this.route.snapshot.paramMap.get("id")))
       .then((user) => {
@@ -120,16 +124,6 @@ export class FormComponent implements OnInit {
         i++;
       });
     }
-  }
-
-  onImageSelected(event) {
-    let file: File = <File> event.target.files[0];
-    let myReader: FileReader = new FileReader();
-
-    myReader.onloadend = (e) => {
-      this.selectedImage = myReader.result;
-    }
-    myReader.readAsDataURL(file);
   }
 
   validateName() {
@@ -212,6 +206,16 @@ export class FormComponent implements OnInit {
     return safeword;
   }
 
+  onImageSelected(event) {
+    this.selectedImage = <File> event.target.files[0];
+    this.nameSelectedImage = event.target.files[0].name;
+  }
+
+  async uploadImageToFirebase(){
+    await this.firebaseStorage.upload(`users/${this.nameSelectedImage}`, this.selectedImage);
+    this.publicURLImage = await this.firebaseStorage.getPublicURL(`users/${this.nameSelectedImage}`); 
+  }
+
   async updateUser(){
     if (
       this.errorInNewName == false &&
@@ -225,7 +229,8 @@ export class FormComponent implements OnInit {
       this.user.phone = this.newPhone;
       this.user.gitHubLogin = this.newGitHubLogin;
       this.user.courses = this.newCourses;
-      if(this.selectedImage != null) this.user.image = this.selectedImage;
+      if(this.selectedImage != null) await this.uploadImageToFirebase();
+      this.user.image = this.publicURLImage;
     }
     await this.apiManagerServices.updateUser(this.user.id, this.user);
     this.userUpdated = true;
@@ -253,7 +258,8 @@ export class FormComponent implements OnInit {
       this.user.gitHubLogin = this.newGitHubLogin;
       this.user.courses = this.newCourses;
       this.user.safeWord = this.safeWordGenerator();
-      this.user.image = this.selectedImage;
+      if(this.selectedImage != null) await this.uploadImageToFirebase();
+      this.user.image = this.publicURLImage;
       await this.apiManagerServices.insertUser(this.user)
       this.apiManagerServices.sendMessage(this.user);
       this.userAdded = true;
@@ -262,7 +268,6 @@ export class FormComponent implements OnInit {
       this.newEmail = "";
       this.newPhone = null;
       this.newGitHubLogin = "";
-      this.newCourses = [];
       setTimeout(() => (this.userAdded = false), 3000);
     }
     this.safeWord = "";

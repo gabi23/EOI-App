@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ApiManagerService, Course } from '../../services/api-manager.service';
 import {MatDialog} from '@angular/material/dialog';
 import {DialogComponent} from '../../components/dialog/dialog.component';
+import { FirebaseStorageService } from '../../services/firebase-storage.service';
 
 @Component({
   selector: 'app-register',
@@ -20,23 +21,15 @@ export class RegisterComponent implements OnInit {
   studyField: string;
   description: string;
   safeWord : string;
-  selectedImage = null;
+  selectedImage: File = null;
+  nameSelectedImage: string = "";
+  publicURLImage: string = "";
 
   courseAdded: boolean = false;
 
-  constructor(private apiManagerServices: ApiManagerService,public dialog: MatDialog) { }
+  constructor(private apiManagerServices: ApiManagerService, private firebaseStorage: FirebaseStorageService, public dialog: MatDialog) { }
 
   ngOnInit(): void {}
-
-  onImageSelected(event) {
-    let file: File = <File> event.target.files[0];
-    let myReader: FileReader = new FileReader();
-
-    myReader.onloadend = (e) => {
-      this.selectedImage = myReader.result;
-    }
-    myReader.readAsDataURL(file);
-  }
 
   openDialogCourse(): void {
     const dialogRef = this.dialog.open(DialogComponent, {
@@ -51,13 +44,24 @@ export class RegisterComponent implements OnInit {
 
     });
   }
+
+  onImageSelected(event) {
+    this.selectedImage = <File> event.target.files[0];
+    this.nameSelectedImage = event.target.files[0].name;
+  }
+
+  async uploadImageToFirebase(){
+    await this.firebaseStorage.upload(`courses/${this.nameSelectedImage}`, this.selectedImage);
+    this.publicURLImage = await this.firebaseStorage.getPublicURL(`courses/${this.nameSelectedImage}`); 
+  }
   
-  addCourse() {
+  async addCourse() {
     this.newCourse.name = this.name;
     this.newCourse.studyField = this.studyField;
     this.newCourse.description = this.description;
+    if(this.selectedImage != null) await this.uploadImageToFirebase();
+    this.newCourse.image = this.publicURLImage;
     this.apiManagerServices.insertCourse(this.newCourse);
-    this.newCourse.image = this.selectedImage;
     this.courseAdded = true;
     
     setTimeout(() => (this.courseAdded = false), 3000);

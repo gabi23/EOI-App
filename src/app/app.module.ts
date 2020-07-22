@@ -25,7 +25,9 @@ import {MatChipsModule} from '@angular/material/chips';
 import {MatListModule} from '@angular/material/list';
 import { ProgrammingLanguageDirective } from './programming-language.directive';
 import { AvatarFallbackDirective } from './avatar-fallback.directive';
-
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireStorageModule, BUCKET } from '@angular/fire/storage';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -56,8 +58,9 @@ import { AvatarFallbackDirective } from './avatar-fallback.directive';
     MatIconModule,
     MatMenuModule,
     MatChipsModule,
-    MatListModule
-    
+    MatListModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireStorageModule    
   ],
   entryComponents: [
     DialogComponent
