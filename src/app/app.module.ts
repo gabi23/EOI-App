@@ -20,6 +20,7 @@ import {MatSelectModule} from '@angular/material/select';
 import { EditComponent } from './pages/edit/edit.component';
 import {MatCardModule} from '@angular/material/card';
 import { FormComponent } from './components/form/form.component';
+import { LoginComponent } from './login/login.component';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatChipsModule} from '@angular/material/chips';
 import {MatListModule} from '@angular/material/list';
@@ -28,6 +29,7 @@ import { AvatarFallbackDirective } from './avatar-fallback.directive';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireStorageModule, BUCKET } from '@angular/fire/storage';
 import { environment } from '../environments/environment';
+import { LoginGuard } from './login.guard';
 
 @NgModule({
   declarations: [
@@ -40,6 +42,7 @@ import { environment } from '../environments/environment';
     DialogComponent,
     EditComponent,
     FormComponent,
+    LoginComponent,
     ProgrammingLanguageDirective,
     AvatarFallbackDirective
   ],
@@ -60,12 +63,14 @@ import { environment } from '../environments/environment';
     MatChipsModule,
     MatListModule,
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFireStorageModule    
+    AngularFireStorageModule,  
+    MatCardModule
+    
   ],
   entryComponents: [
     DialogComponent
   ],
-  providers: [],
+  providers: [LoginGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

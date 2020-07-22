@@ -1,0 +1,18 @@
+<mat-card>
+    <mat-card-title>Login</mat-card-title>
+    <mat-card-content>
+        <form #loginFrom="ngForm" (ngSubmit)="login(loginFrom)">
+            <p>
+                <mat-form-field>
+                    <input type="text" matInput placeholder="correo electronico" name="email" id="email" ngModel />
+                </mat-form-field>
+            </p>
+            <p>
+                <mat-form-field>
+                    <input type="password" matInput placeholder="contraseña" name="password" id="password" ngModel />
+                </mat-form-field>
+            </p>
+            <button type="submit" mat-raised-button="primary">Login</button>
+        </form>
+    </mat-card-content>
+</mat-card>

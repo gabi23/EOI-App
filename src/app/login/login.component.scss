@@ -1,0 +1,16 @@
+:host {
+  display: flex;
+  justify-content: center;
+  margin: 100px 0;
+}
+
+.mat-form-fiel {
+  width: 100%;
+  min-width: 300px;
+}
+
+mat-card-tilte,
+mat-card-content {
+  display: flex;
+  justify-content: center;
+}
