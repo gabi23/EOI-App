@@ -47,4 +47,4 @@ db.json
 Thumbs.db
 
 # environments
-/environments/environment.ts
+src/environments/environment.ts
