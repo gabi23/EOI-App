@@ -26,6 +26,7 @@ export class FormComponent implements OnInit {
     phone: 0,
     courses: [],
     gitHubLogin: "",
+    web : "",
     image: ""
   }; 
 
@@ -35,6 +36,7 @@ export class FormComponent implements OnInit {
   newSurname: string;
   newPhone: number;
   newEmail: string;
+  newWeb: string;
   newGitHubLogin: string;
   newCourses: number[] = [];
 
@@ -227,6 +229,7 @@ export class FormComponent implements OnInit {
       this.user.surname = this.newSurname;
       this.user.email = this.newEmail;
       this.user.phone = this.newPhone;
+      this.user.web = this.newWeb;
       this.user.gitHubLogin = this.newGitHubLogin;
       this.user.courses = this.newCourses;
       if(this.selectedImage != null) await this.uploadImageToFirebase();
@@ -255,6 +258,7 @@ export class FormComponent implements OnInit {
       this.user.surname = this.newSurname;
       this.user.email = this.newEmail;
       this.user.phone = this.newPhone;
+      this.user.web = this.newWeb;
       this.user.gitHubLogin = this.newGitHubLogin;
       this.user.courses = this.newCourses;
       this.user.safeWord = this.safeWordGenerator();

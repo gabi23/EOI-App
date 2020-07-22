@@ -31,6 +31,12 @@
     </div>
 
     <div class="inputs">
+        <p>Pagina web</p>
+        <input type="text" name="newWeb" placeholder={{user.web}} (keyup.enter)="updateUser()"
+               [(ngModel)]="newWeb" />
+    </div>
+
+    <div class="inputs">
         <p>Usuario de GitHub</p>
         <input type="text" name="newGitHubLogin" placeholder={{user.gitHubLogin}} (keyup.enter)="updateUser()"
                [(ngModel)]="newGitHubLogin" />
@@ -87,6 +93,12 @@
             (focus)="phoneOnFocus()" (blur)="validatePhone()" [(ngModel)]="newPhone"
             [class.error]="errorInNewPhone==true" />
         <p class="errors" *ngIf="errorInNewPhone==true">{{ phoneErrorMesagge }}</p>
+    </div>
+
+    <div class="inputs">
+        <p>Pagina web</p>
+        <input type="text" name="newWeb" placeholder={{user.web}} (keyup.enter)="updateUser()"
+               [(ngModel)]="newWeb" />
     </div>
 
     <div class="inputs">
