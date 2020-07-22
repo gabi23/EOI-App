@@ -28,7 +28,6 @@ import { ProgrammingLanguageDirective } from './programming-language.directive';
 import { AvatarFallbackDirective } from './avatar-fallback.directive';
 import { LoginGuard } from './login.guard';
 
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -59,7 +58,8 @@ import { LoginGuard } from './login.guard';
     MatIconModule,
     MatMenuModule,
     MatChipsModule,
-    MatListModule
+    MatListModule,
+    MatCardModule
     
   ],
   entryComponents: [
