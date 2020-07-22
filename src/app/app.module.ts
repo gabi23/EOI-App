@@ -28,8 +28,6 @@ import { AvatarFallbackDirective } from './avatar-fallback.directive';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireStorageModule, BUCKET } from '@angular/fire/storage';
 import { environment } from '../environments/environment';
-/* import 'firebase/storage'; */
-
 
 @NgModule({
   declarations: [
