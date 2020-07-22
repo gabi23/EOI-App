@@ -54,7 +54,7 @@
         <span>User successfully updated</span>
     </div> 
 
-    <button id="updateButton" type='submit' (click)='openDialogEditOn()'>Actualizar</button>
+    <button mat-raised-button color="primary" id="updateButton" type='submit' (click)='openDialogEditOn()'>Actualizar</button>
 </form>
 
 <form *ngIf="isEdit==false">
@@ -111,7 +111,7 @@
         <span>Usuario añadido correctamente</span>
     </div> 
 
-    <button id="addButton" type='submit' (click)='openDialogNewUser()'>Añadir</button>
+    <button mat-raised-button class="form-button" color="primary" id="addButton" type='submit' (click)='openDialogNewUser()'>Añadir</button>
 </form>
 
 

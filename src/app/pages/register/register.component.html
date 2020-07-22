@@ -1,15 +1,15 @@
 <div class="container">
-    <div>
-        <h2>Registrar Usuario</h2>
+    <div class="form-container">
+        <h1>Registrar Usuario</h1>
         <app-form></app-form>
     </div>
     
-    <div>
-        <h2>Registrar Curso</h2>
+    <div class="form-container">
+        <h1>Registrar Curso</h1>
         <form>
             <div class="inputs">
                 <p>Nombre</p>
-                <input type="text" name="name" (keyup.enter)="addCourse()" [(ngModel)]="name"/>
+                <input  type="text" name="name" (keyup.enter)="addCourse()" [(ngModel)]="name"/>
             </div>
         
             <div class="inputs">
@@ -31,7 +31,7 @@
                 <span>Curso añadido correctamente</span>
             </div> 
         
-            <button id="addButton" type='submit' (click)='openDialogCourse()'>Añadir</button>
+            <button mat-raised-button color="primary" id="addButton" type='submit' (click)='openDialogCourse()'>Añadir</button>
         </form>
     </div>
 </div>
