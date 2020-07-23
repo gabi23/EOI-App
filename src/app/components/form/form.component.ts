@@ -36,7 +36,7 @@ export class FormComponent implements OnInit {
   newPhone: number;
   newEmail: string;
   newGitHubLogin: string;
-  newCourses: number[] = [];
+  newCourses: string[] = [];
 
   errorInNewName: boolean = false;
   errorInNewSurname: boolean = false;
@@ -101,13 +101,13 @@ export class FormComponent implements OnInit {
     this.courses = await this.firebaseService.getAllCourses();
   }
 
-  isChecked(id: number): boolean{
+  isChecked(id: string): boolean{
     return this.user.courses.includes(id);
   }
 
   onCheckboxChange(event) {
     if(event.target.checked) {
-      this.newCourses.push(parseInt(event.target.value));
+      this.newCourses.push(event.target.value);
     }else {
       let i: number = 0;
       this.newCourses.forEach(courseId => {

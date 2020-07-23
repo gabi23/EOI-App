@@ -11,14 +11,14 @@ export type User = {
   phone: number,
   role?: string,
   safeWord?: string,
-  courses: number[],
+  courses: string[],
   gitHubLogin: string,
   image?,
   web?
 };
 
 export type Course = {
-  id?: number, 
+  id?: string, 
   name: string,
   studyField: string,
   description: string,
@@ -134,7 +134,7 @@ export class FirebaseService {
     return users; 
   }
 
-  async getUserCourses(ids:number[]): Promise<Course[]>{
+  async getUserCourses(ids:string[]): Promise<Course[]>{
     let courses: Course[] = [];
     for(let i=0; i<ids.length; i++){
       await this.firebaseDB.collection("courses", ref => ref.where('id', '==', ids[i])).get().toPromise()

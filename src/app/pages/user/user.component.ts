@@ -30,7 +30,7 @@ export class UserComponent implements OnInit {
     this.loadUserRepositories(this.user.gitHubLogin);
   }
 
-  async loadUserCourses (ids : number []){
+  async loadUserCourses (ids : string []){
     this.courses = await this.firebaseService.getUserCourses(ids);
   }
 

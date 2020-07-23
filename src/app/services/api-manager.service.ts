@@ -9,7 +9,7 @@ export type User = {
   phone: number,
   role?: string,
   safeWord?: string,
-  courses: number[],
+  courses: string[],
   gitHubLogin: string,
   image?,
   web?
