@@ -1,12 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiManagerService, User, Course } from '../../services/api-manager.service';
+import { ApiManagerService } from '../../services/api-manager.service';
 import { GitHubApiService } from '../../services/git-hub-api.service'
 import { ActivatedRoute, Params } from '@angular/router';
+import { User, Course, FirebaseService } from '../../services/firebase.service';
 import { ViewEncapsulation } from '@angular/core';
-
-
-
-
 
 
 @Component({
@@ -20,26 +17,25 @@ export class UserComponent implements OnInit {
   courses : Course []; 
   repos : any[];
 
-  constructor( private apiManager : ApiManagerService, private route: ActivatedRoute, private gitHubApiManager : GitHubApiService ) { 
+  constructor( private apiManager : ApiManagerService, private firebaseService: FirebaseService, private route: ActivatedRoute, private gitHubApiManager : GitHubApiService ) { 
     this.loadUser();
-  
-
-
   }
 
 
   ngOnInit(): void {
   }
 
-  loadUser ()  {
-    this.apiManager.getUser(Number(this.route.snapshot.paramMap.get("id")))
-      .then((user) => {
+  async loadUser() {
+    const user = await this.firebaseService.getUser(this.route.snapshot.paramMap.get("id"))
+    this.user = user;
+    this.loadUserRepositories(user.gitHubLogin);
+      /* .then((user) => {
         this.user = user;
         this.loadUserCourses(user.courses)
-        this.loadUserRepositories(user.gitHubLogin)
+        
        }).catch((err) => {
          console.log (err);
-      });
+      }); */
   }
 
   loadUserCourses (ids : number []){

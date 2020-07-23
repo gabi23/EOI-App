@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { User, Course, ApiManagerService } from '../../services/api-manager.service';
+import { FirebaseService } from '../../services/firebase.service';
 
 @Component({
   selector: 'app-home',
@@ -9,16 +10,15 @@ import { User, Course, ApiManagerService } from '../../services/api-manager.serv
 export class HomeComponent implements OnInit {
   courses: Course[] = [];
 
-  constructor(private apiManagerServices: ApiManagerService) {
+  constructor(private apiManagerServices: ApiManagerService, private firebaseService: FirebaseService) {
     this.loadCourses();
    }
 
   ngOnInit(): void {
   }
 
-  async loadCourses(): Promise<void> {
-    this.courses = await this.apiManagerServices.getCourses();
-    console.log(this.courses);
+  loadCourses() {
+    this.courses = this.firebaseService.getAllCourses();
   }
 
 }

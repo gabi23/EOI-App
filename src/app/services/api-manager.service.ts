@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import axios from 'axios';
 
 export type User = {
-  id?: number, 
+  id?: string, 
   name: string,
   surname: string,
   email: string,
@@ -43,19 +43,19 @@ export class ApiManagerService {
       .then( res => res.data)
   }
 
-  public getAllUsers(): Promise<User[]> {
+  /* public getAllUsers(): Promise<User[]> {
     const users = axios.get(this.urlUsers)
                     .then(response => response.data)
                     .catch(error => console.log(error));
     return users;
-  }
+  } */
 
-  public getCourses(): Promise<Course[]>{
+  /* public getCourses(): Promise<Course[]>{
     const courses = axios.get(this.urlCourses)
                       .then(response => response.data)
                       .catch(error => console.log(error));
     return courses;
-  }
+  } */
 
   public getCourseByName(name:string): Promise<Course[]>{
     const course = axios.get(`${this.urlCourses}?name=${name}`)
@@ -106,16 +106,16 @@ export class ApiManagerService {
     .catch(error => console.log(error))
   }
 
-  public insertUser(newUser:User): Promise<User[]>{
+  /* public insertUser(newUser:User): Promise<User[]>{
     return axios.post(this.urlUsers, newUser)
     .then(response => response.data)
     .catch(error => console.log(error))
-  }
+  } */
 
-  public insertCourse(newCourse:Course): Promise<Course[]>{
+  /* public insertCourse(newCourse:Course): Promise<Course[]>{
     return axios.post(this.urlCourses, newCourse)
     .then(response => response.data)
     .catch(error => console.log(error))
-  }
+  } */
 
 }

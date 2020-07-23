@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { User, Course, ApiManagerService } from '../../services/api-manager.service';
+import { ApiManagerService } from '../../services/api-manager.service';
 import {MatDialog} from '@angular/material/dialog';
 import {DialogComponent} from '../../components/dialog/dialog.component';
 import { Router } from '@angular/router';
+import { User, Course, FirebaseService } from '../../services/firebase.service';
 
 
 @Component({
@@ -19,7 +20,7 @@ export class UsersComponent implements OnInit {
   userToSearch: string = "";
   safeWord : string;
 
-  constructor(private apiManagerServices: ApiManagerService, public dialog: MatDialog, public router: Router) {
+  constructor(private apiManagerServices: ApiManagerService, private firebaseService: FirebaseService, public dialog: MatDialog, public router: Router) {
     this.loadUsers();
     this.loadCourses();
   }
@@ -40,6 +41,7 @@ export class UsersComponent implements OnInit {
 
   //Dialogo para editar
   openDialogEdit(user: User): void {
+    console.log("dialog")
     const dialogRef = this.dialog.open(DialogComponent, {
       width: '275px',
       data: {name: this.safeWord},      
@@ -52,12 +54,13 @@ export class UsersComponent implements OnInit {
     });
   }
 
-  async loadUsers(): Promise<void> {
-    this.users = await this.apiManagerServices.getAllUsers();
+  loadUsers() {
+    this.users = this.firebaseService.getAllUsers();
+    console.log(this.users)
   }
 
   async loadCourses(): Promise<void> {
-    this.courses = await this.apiManagerServices.getCourses();
+    this.courses = this.firebaseService.getAllCourses();
     this.users.forEach(user => {
       this.apiManagerServices.getUserCourses(user.courses)
         .then(courses => {

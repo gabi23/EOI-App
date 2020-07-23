@@ -4,7 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
 import {MatDialog} from '@angular/material/dialog';
 import {DialogComponent} from '../../components/dialog/dialog.component';
-import { FirebaseStorageService } from '../../services/firebase-storage.service';
+import { FirebaseService } from '../../services/firebase.service';
 
 @Component({
   selector: 'app-form',
@@ -55,7 +55,7 @@ export class FormComponent implements OnInit {
   nameSelectedImage: string = "";
   publicURLImage: string = "";
 
-  constructor(private apiManagerServices: ApiManagerService, private route: ActivatedRoute, private firebaseStorage: FirebaseStorageService, public router: Router, public dialog: MatDialog){
+  constructor(private apiManagerServices: ApiManagerService, private route: ActivatedRoute, private firebaseService: FirebaseService, public router: Router, public dialog: MatDialog){
     this.isEdit = this.route.snapshot.url.toString().includes('edit'); 
     this.loadUser();
     this.loadCourses();
@@ -103,8 +103,8 @@ export class FormComponent implements OnInit {
     this.user.courses.forEach(courseId => this.newCourses.push(courseId));
   }
 
-  async loadCourses(): Promise<void> {
-    this.courses = await this.apiManagerServices.getCourses();
+  loadCourses() {
+    this.courses = this.firebaseService.getAllCourses();
   }
 
   isChecked(id: number): boolean{
@@ -212,8 +212,8 @@ export class FormComponent implements OnInit {
   }
 
   async uploadImageToFirebase(){
-    await this.firebaseStorage.upload(`users/${this.nameSelectedImage}`, this.selectedImage);
-    this.publicURLImage = await this.firebaseStorage.getPublicURL(`users/${this.nameSelectedImage}`); 
+    await this.firebaseService.upload(`users/${this.nameSelectedImage}`, this.selectedImage);
+    this.publicURLImage = await this.firebaseService.getPublicURL(`users/${this.nameSelectedImage}`); 
   }
 
   async updateUser(){
@@ -260,7 +260,8 @@ export class FormComponent implements OnInit {
       this.user.safeWord = this.safeWordGenerator();
       if(this.selectedImage != null) await this.uploadImageToFirebase();
       this.user.image = this.publicURLImage;
-      await this.apiManagerServices.insertUser(this.user)
+      /* await this.apiManagerServices.insertUser(this.user); */
+      await this.firebaseService.addUser(this.user);
       this.apiManagerServices.sendMessage(this.user);
       this.userAdded = true;
       this.newName = "";

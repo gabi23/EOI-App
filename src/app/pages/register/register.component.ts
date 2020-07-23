@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ApiManagerService, Course } from '../../services/api-manager.service';
 import {MatDialog} from '@angular/material/dialog';
 import {DialogComponent} from '../../components/dialog/dialog.component';
-import { FirebaseStorageService } from '../../services/firebase-storage.service';
+import { FirebaseService } from '../../services/firebase.service';
 
 @Component({
   selector: 'app-register',
@@ -27,7 +27,7 @@ export class RegisterComponent implements OnInit {
 
   courseAdded: boolean = false;
 
-  constructor(private apiManagerServices: ApiManagerService, private firebaseStorage: FirebaseStorageService, public dialog: MatDialog) { }
+  constructor(private apiManagerServices: ApiManagerService, private firebaseService: FirebaseService, public dialog: MatDialog) { }
 
   ngOnInit(): void {}
 
@@ -51,8 +51,8 @@ export class RegisterComponent implements OnInit {
   }
 
   async uploadImageToFirebase(){
-    await this.firebaseStorage.upload(`courses/${this.nameSelectedImage}`, this.selectedImage);
-    this.publicURLImage = await this.firebaseStorage.getPublicURL(`courses/${this.nameSelectedImage}`); 
+    await this.firebaseService.upload(`courses/${this.nameSelectedImage}`, this.selectedImage);
+    this.publicURLImage = await this.firebaseService.getPublicURL(`courses/${this.nameSelectedImage}`); 
   }
   
   async addCourse() {
@@ -61,7 +61,7 @@ export class RegisterComponent implements OnInit {
     this.newCourse.description = this.description;
     if(this.selectedImage != null) await this.uploadImageToFirebase();
     this.newCourse.image = this.publicURLImage;
-    this.apiManagerServices.insertCourse(this.newCourse);
+    this.firebaseService.addCourse(this.newCourse);
     this.courseAdded = true;
     
     setTimeout(() => (this.courseAdded = false), 3000);

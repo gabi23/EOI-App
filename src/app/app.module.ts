@@ -27,6 +27,7 @@ import { ProgrammingLanguageDirective } from './programming-language.directive';
 import { AvatarFallbackDirective } from './avatar-fallback.directive';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireStorageModule, BUCKET } from '@angular/fire/storage';
+import { AngularFirestoreModule } from "@angular/fire/firestore";
 import { environment } from '../environments/environment';
 
 @NgModule({
@@ -60,7 +61,8 @@ import { environment } from '../environments/environment';
     MatChipsModule,
     MatListModule,
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFireStorageModule    
+    AngularFireStorageModule,
+    AngularFirestoreModule    
   ],
   entryComponents: [
     DialogComponent
