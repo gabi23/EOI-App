@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiManagerService } from '../../services/api-manager.service';
 import { GitHubApiService } from '../../services/git-hub-api.service'
 import { ActivatedRoute, Params } from '@angular/router';
 import { User, Course, FirebaseService } from '../../services/firebase.service';
@@ -17,7 +16,7 @@ export class UserComponent implements OnInit {
   courses : Course []; 
   repos : any[];
 
-  constructor( private apiManager : ApiManagerService, private firebaseService: FirebaseService, private route: ActivatedRoute, private gitHubApiManager : GitHubApiService ) { 
+  constructor(private firebaseService: FirebaseService, private route: ActivatedRoute, private gitHubApiManager : GitHubApiService) { 
     this.loadUser();
   }
 
@@ -26,25 +25,13 @@ export class UserComponent implements OnInit {
   }
 
   async loadUser() {
-    const user = await this.firebaseService.getUser(this.route.snapshot.paramMap.get("id"))
-    this.user = user;
-    this.loadUserRepositories(user.gitHubLogin);
-      /* .then((user) => {
-        this.user = user;
-        this.loadUserCourses(user.courses)
-        
-       }).catch((err) => {
-         console.log (err);
-      }); */
+    this.user = await this.firebaseService.getUser(this.route.snapshot.paramMap.get("id"));
+    this.loadUserCourses(this.user.courses);
+    this.loadUserRepositories(this.user.gitHubLogin);
   }
 
-  loadUserCourses (ids : number []){
-    this.apiManager.getUserCourses(ids)
-      .then((courses) => {
-        this.courses = courses;
-      }).catch((err) => {
-        console.log (err);
-     });
+  async loadUserCourses (ids : number []){
+    this.courses = await this.firebaseService.getUserCourses(ids);
   }
 
   loadUserRepositories (gitHubLogin : string){

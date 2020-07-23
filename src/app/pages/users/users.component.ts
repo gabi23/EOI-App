@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiManagerService } from '../../services/api-manager.service';
 import {MatDialog} from '@angular/material/dialog';
 import {DialogComponent} from '../../components/dialog/dialog.component';
 import { Router } from '@angular/router';
@@ -15,12 +14,13 @@ export class UsersComponent implements OnInit {
 
   users: User[] = [];
   courses: Course[] = [];
+  course: Course[] = [];
   nameOfCourses: string[][] = [];
   courseSelected: string = "All courses";
   userToSearch: string = "";
   safeWord : string;
 
-  constructor(private apiManagerServices: ApiManagerService, private firebaseService: FirebaseService, public dialog: MatDialog, public router: Router) {
+  constructor(private firebaseService: FirebaseService, public dialog: MatDialog, public router: Router) {
     this.loadUsers();
     this.loadCourses();
   }
@@ -54,28 +54,19 @@ export class UsersComponent implements OnInit {
     });
   }
 
-  loadUsers() {
-    this.users = this.firebaseService.getAllUsers();
-    console.log(this.users)
+  async loadUsers() {
+    this.users = await this.firebaseService.getAllUsers();
   }
 
   async loadCourses(): Promise<void> {
-    this.courses = this.firebaseService.getAllCourses();
-    this.users.forEach(user => {
-      this.apiManagerServices.getUserCourses(user.courses)
-        .then(courses => {
-          this.nameOfCourses.push(courses.map(course => course.name));
-        })
-        .catch(err => {
-          console.log(err);
-        });
-    });
+    this.courses = await this.firebaseService.getAllCourses();
   }
 
   async searchUser(){
     this.users = [];
     this.nameOfCourses = [];
-    this.users = await this.apiManagerServices.getUserByName(this.userToSearch);
+    console.log(this.userToSearch)
+    this.users = await this.firebaseService.getUserByName(this.userToSearch);
     this.loadCourses();
   }
 
@@ -83,8 +74,9 @@ export class UsersComponent implements OnInit {
     if(this.courseSelected != "All courses"){
       this.users = [];
       this.nameOfCourses = [];
-      const course = await this.apiManagerServices.getCourseByName(this.courseSelected);
-      this.users = await this.apiManagerServices.getUsersByCourses(course[0].id);
+      const course = await this.firebaseService.getCourseByName(this.courseSelected);
+      console.log("hello", course)
+      this.users = await this.firebaseService.getUsersByCourse(course[0]);
       this.loadCourses();
     }
     else{
@@ -95,11 +87,8 @@ export class UsersComponent implements OnInit {
 
   deleteUser(user: User) {
     if (this.safeWord == "admin1234" || this.safeWord == user.safeWord) { // falta añadir la palabra de seguridad de la persona tambien
-      this.apiManagerServices.deleteUser(user.id)
-      .then(res => {
-        this.users= this.users.filter(aux => aux.id != user.id)
-      })
-      .catch(error => console.log(error))
+      this.firebaseService.deleteUser(user.id);
+      this.loadUsers();
     }
     this.safeWord = "";
   }

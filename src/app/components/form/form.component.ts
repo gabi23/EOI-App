@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiManagerService, User, Course } from '../../services/api-manager.service';
+import { ApiManagerService } from '../../services/api-manager.service';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
 import {MatDialog} from '@angular/material/dialog';
 import {DialogComponent} from '../../components/dialog/dialog.component';
-import { FirebaseService } from '../../services/firebase.service';
+import { FirebaseService, User, Course } from '../../services/firebase.service';
 
 @Component({
   selector: 'app-form',
@@ -93,18 +93,12 @@ export class FormComponent implements OnInit {
   }
 
   async loadUser(){
-    await this.apiManagerServices.getUser(Number(this.route.snapshot.paramMap.get("id")))
-      .then((user) => {
-        this.user = user;
-       }).catch((err) => {
-         console.log (err);
-      });
-    
+    this.user = await this.firebaseService.getUser(this.route.snapshot.paramMap.get("id"))
     this.user.courses.forEach(courseId => this.newCourses.push(courseId));
   }
 
-  loadCourses() {
-    this.courses = this.firebaseService.getAllCourses();
+  async loadCourses() {
+    this.courses = await this.firebaseService.getAllCourses();
   }
 
   isChecked(id: number): boolean{
@@ -153,7 +147,7 @@ export class FormComponent implements OnInit {
   }
 
   async validateEmail() {
-    let aux = await this.apiManagerServices.findEmail(this.newEmail);
+    let aux = await this.firebaseService.findEmail(this.newEmail);
     if (!this.emailValid.test(this.newEmail)) {
       this.errorInNewEmail = true;
       this.emailErrorMesagge = "Debe tener la estructura: usuario@servidor";
@@ -232,7 +226,7 @@ export class FormComponent implements OnInit {
       if(this.selectedImage != null) await this.uploadImageToFirebase();
       this.user.image = this.publicURLImage;
     }
-    await this.apiManagerServices.updateUser(this.user.id, this.user);
+    this.firebaseService.updateUser(this.user.id, this.user);
     this.userUpdated = true;
     this.safeWord = "";
     setTimeout(() =>{
@@ -260,7 +254,6 @@ export class FormComponent implements OnInit {
       this.user.safeWord = this.safeWordGenerator();
       if(this.selectedImage != null) await this.uploadImageToFirebase();
       this.user.image = this.publicURLImage;
-      /* await this.apiManagerServices.insertUser(this.user); */
       await this.firebaseService.addUser(this.user);
       this.apiManagerServices.sendMessage(this.user);
       this.userAdded = true;

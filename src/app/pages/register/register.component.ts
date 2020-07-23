@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiManagerService, Course } from '../../services/api-manager.service';
 import {MatDialog} from '@angular/material/dialog';
 import {DialogComponent} from '../../components/dialog/dialog.component';
-import { FirebaseService } from '../../services/firebase.service';
+import { FirebaseService, Course } from '../../services/firebase.service';
 
 @Component({
   selector: 'app-register',
@@ -27,7 +26,7 @@ export class RegisterComponent implements OnInit {
 
   courseAdded: boolean = false;
 
-  constructor(private apiManagerServices: ApiManagerService, private firebaseService: FirebaseService, public dialog: MatDialog) { }
+  constructor(private firebaseService: FirebaseService, public dialog: MatDialog) { }
 
   ngOnInit(): void {}
 
