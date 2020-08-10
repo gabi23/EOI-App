@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiManagerService, User, Course } from '../../services/api-manager.service';
+import { ApiManagerService } from '../../services/api-manager.service';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
 import {MatDialog} from '@angular/material/dialog';
 import {DialogComponent} from '../../components/dialog/dialog.component';
-import { FirebaseStorageService } from '../../services/firebase-storage.service';
+import { FirebaseService, User, Course } from '../../services/firebase.service';
 
 @Component({
   selector: 'app-form',
@@ -38,7 +38,7 @@ export class FormComponent implements OnInit {
   newEmail: string;
   newWeb: string;
   newGitHubLogin: string;
-  newCourses: number[] = [];
+  newCourses: string[] = [];
 
   errorInNewName: boolean = false;
   errorInNewSurname: boolean = false;
@@ -57,7 +57,7 @@ export class FormComponent implements OnInit {
   nameSelectedImage: string = "";
   publicURLImage: string = "";
 
-  constructor(private apiManagerServices: ApiManagerService, private route: ActivatedRoute, private firebaseStorage: FirebaseStorageService, public router: Router, public dialog: MatDialog){
+  constructor(private apiManagerServices: ApiManagerService, private route: ActivatedRoute, private firebaseService: FirebaseService, public router: Router, public dialog: MatDialog){
     this.isEdit = this.route.snapshot.url.toString().includes('edit'); 
     this.loadUser();
     this.loadCourses();
@@ -95,27 +95,21 @@ export class FormComponent implements OnInit {
   }
 
   async loadUser(){
-    await this.apiManagerServices.getUser(Number(this.route.snapshot.paramMap.get("id")))
-      .then((user) => {
-        this.user = user;
-       }).catch((err) => {
-         console.log (err);
-      });
-    
+    this.user = await this.firebaseService.getUser(this.route.snapshot.paramMap.get("id"))
     this.user.courses.forEach(courseId => this.newCourses.push(courseId));
   }
 
-  async loadCourses(): Promise<void> {
-    this.courses = await this.apiManagerServices.getCourses();
+  async loadCourses() {
+    this.courses = await this.firebaseService.getAllCourses();
   }
 
-  isChecked(id: number): boolean{
+  isChecked(id: string): boolean{
     return this.user.courses.includes(id);
   }
 
   onCheckboxChange(event) {
     if(event.target.checked) {
-      this.newCourses.push(parseInt(event.target.value));
+      this.newCourses.push(event.target.value);
     }else {
       let i: number = 0;
       this.newCourses.forEach(courseId => {
@@ -155,7 +149,7 @@ export class FormComponent implements OnInit {
   }
 
   async validateEmail() {
-    let aux = await this.apiManagerServices.findEmail(this.newEmail);
+    let aux = await this.firebaseService.findEmail(this.newEmail);
     if (!this.emailValid.test(this.newEmail)) {
       this.errorInNewEmail = true;
       this.emailErrorMesagge = "Debe tener la estructura: usuario@servidor";
@@ -214,8 +208,8 @@ export class FormComponent implements OnInit {
   }
 
   async uploadImageToFirebase(){
-    await this.firebaseStorage.upload(`users/${this.nameSelectedImage}`, this.selectedImage);
-    this.publicURLImage = await this.firebaseStorage.getPublicURL(`users/${this.nameSelectedImage}`); 
+    await this.firebaseService.upload(`users/${this.nameSelectedImage}`, this.selectedImage);
+    this.publicURLImage = await this.firebaseService.getPublicURL(`users/${this.nameSelectedImage}`); 
   }
 
   async updateUser(){
@@ -235,7 +229,7 @@ export class FormComponent implements OnInit {
       if(this.selectedImage != null) await this.uploadImageToFirebase();
       this.user.image = this.publicURLImage;
     }
-    await this.apiManagerServices.updateUser(this.user.id, this.user);
+    this.firebaseService.updateUser(this.user.id, this.user);
     this.userUpdated = true;
     this.safeWord = "";
     setTimeout(() =>{
@@ -264,7 +258,7 @@ export class FormComponent implements OnInit {
       this.user.safeWord = this.safeWordGenerator();
       if(this.selectedImage != null) await this.uploadImageToFirebase();
       this.user.image = this.publicURLImage;
-      await this.apiManagerServices.insertUser(this.user)
+      await this.firebaseService.addUser(this.user);
       this.apiManagerServices.sendMessage(this.user);
       this.userAdded = true;
       this.newName = "";

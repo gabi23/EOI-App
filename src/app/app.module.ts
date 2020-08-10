@@ -28,8 +28,9 @@ import { ProgrammingLanguageDirective } from './programming-language.directive';
 import { AvatarFallbackDirective } from './avatar-fallback.directive';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireStorageModule, BUCKET } from '@angular/fire/storage';
-import { environment } from '../environments/environment';
 import { LoginGuard } from './login.guard';
+import { AngularFirestoreModule } from "@angular/fire/firestore";
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -64,8 +65,8 @@ import { LoginGuard } from './login.guard';
     MatListModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireStorageModule,  
-    MatCardModule
-    
+    MatCardModule,
+    AngularFirestoreModule    
   ],
   entryComponents: [
     DialogComponent
